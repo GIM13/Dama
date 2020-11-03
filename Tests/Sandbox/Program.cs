@@ -5,17 +5,15 @@
     using System.IO;
     using System.Threading.Tasks;
 
-    using Dama.Data;
-    using Dama.Data.Common;
-    using Dama.Data.Common.Repositories;
-    using Dama.Data.Models;
-    using Dama.Data.Repositories;
-    using Dama.Data.Seeding;
-    using Dama.Services.Data;
-    using Dama.Services.Messaging;
-
     using CommandLine;
-
+    using DamaGame.Data;
+    using DamaGame.Data.Common;
+    using DamaGame.Data.Common.Repositories;
+    using DamaGame.Data.Models;
+    using DamaGame.Data.Repositories;
+    using DamaGame.Data.Seeding;
+    using DamaGame.Services.Data;
+    using DamaGame.Services.Messaging;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
