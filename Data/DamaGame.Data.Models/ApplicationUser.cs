@@ -16,6 +16,7 @@ namespace DamaGame.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Players = new HashSet<Player>();
         }
 
         // Audit info
@@ -28,7 +29,7 @@ namespace DamaGame.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
-        public virtual Player Player { get; set; }
+        public virtual ICollection<Player> Players { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

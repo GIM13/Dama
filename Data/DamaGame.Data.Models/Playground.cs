@@ -2,7 +2,9 @@
 {
     using System;
 
-    public class Playground
+    using DamaGame.Data.Common.Models;
+
+    public class Playground : BaseDeletableModel<string>
     {
         public Playground(string leftPlayerId, string rightPlayerId)
         {
@@ -12,18 +14,14 @@
 
             this.RightPlayer.Id = rightPlayerId;
 
-            this.Positions = new Position[24];
-
             this.FillingThePositions();
         }
-
-        public string Id { get; set; }
 
         public virtual Player LeftPlayer { get; set; }
 
         public virtual Player RightPlayer { get; set; }
 
-        public virtual Position[] Positions { get; set; }
+        public virtual Position[] Positions { get; set; } = new Position[24];
 
         private void FillingThePositions()
         {

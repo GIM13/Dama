@@ -1,17 +1,15 @@
 ﻿namespace DamaGame.Data.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
-    public class Dama
+    using DamaGame.Data.Common.Models;
+
+    public class Dama : BaseDeletableModel<string>
     {
         public Dama()
         {
             this.Id = Guid.NewGuid().ToString();
         }
-
-        public string Id { get; set; }
 
         public virtual Position FirstPosition { get; set; }
 

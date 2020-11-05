@@ -4,16 +4,16 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using DamaGame.Data.Common.Models;
+    using DamaGame.Data.Models.Enum;
     using DamaGame.Data.Models.Enums;
 
-    public class Position
+    public class Position : BaseDeletableModel<string>
     {
         public Position()
         {
             this.Id = Guid.NewGuid().ToString();
         }
-
-        public string Id { get; set; }
 
         [Required]
         [StringLength(2, MinimumLength = 2)]
@@ -23,7 +23,7 @@
 
         public FigurePosition Figure { get; set; } = FigurePosition.FigureFreePosition;
 
-        public bool IsBusy { get; set; } = false;
+        public StatePosition StatePosition { get; set; } = StatePosition.FreePosition;
 
         public virtual Playground Playground { get; set; }
 

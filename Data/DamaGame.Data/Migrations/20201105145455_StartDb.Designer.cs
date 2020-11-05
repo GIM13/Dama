@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DamaGame.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201102195230_AddBusyToPosition")]
-    partial class AddBusyToPosition
+    [Migration("20201105145455_StartDb")]
+    partial class StartDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -146,6 +146,21 @@ namespace DamaGame.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Figure")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PositionId")
                         .HasColumnType("nvarchar(450)");
 
@@ -153,7 +168,12 @@ namespace DamaGame.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("PositionId");
 
@@ -165,8 +185,20 @@ namespace DamaGame.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FirstPositionId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SecondPositionId")
                         .HasColumnType("nvarchar(450)");
@@ -177,6 +209,8 @@ namespace DamaGame.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FirstPositionId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("SecondPositionId");
 
@@ -190,8 +224,20 @@ namespace DamaGame.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Figure")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PlayerId")
                         .HasColumnType("nvarchar(450)");
@@ -203,6 +249,8 @@ namespace DamaGame.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("PlayerId");
 
@@ -217,20 +265,33 @@ namespace DamaGame.Data.Migrations
                     b.Property<string>("ApplicationUser")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("IsBusy")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("Losses")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Wins")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUser")
-                        .IsUnique()
-                        .HasFilter("[ApplicationUser] IS NOT NULL");
+                    b.HasIndex("ApplicationUser");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Players");
                 });
@@ -240,13 +301,27 @@ namespace DamaGame.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LeftPlayerId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("RightPlayerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("LeftPlayerId");
 
@@ -263,11 +338,20 @@ namespace DamaGame.Data.Migrations
                     b.Property<int>("Color")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Figure")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsBusy")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -277,7 +361,12 @@ namespace DamaGame.Data.Migrations
                     b.Property<string>("PlaygroundId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("StatePosition")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("PlaygroundId");
 
@@ -452,8 +541,8 @@ namespace DamaGame.Data.Migrations
             modelBuilder.Entity("DamaGame.Data.Models.Player", b =>
                 {
                     b.HasOne("DamaGame.Data.Models.ApplicationUser", "User")
-                        .WithOne("Player")
-                        .HasForeignKey("DamaGame.Data.Models.Player", "ApplicationUser");
+                        .WithMany("Players")
+                        .HasForeignKey("ApplicationUser");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Playground", b =>

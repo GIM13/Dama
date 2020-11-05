@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
 
     using CommandLine;
+
     using DamaGame.Data;
     using DamaGame.Data.Common;
     using DamaGame.Data.Common.Repositories;
@@ -14,6 +15,7 @@
     using DamaGame.Data.Seeding;
     using DamaGame.Services.Data;
     using DamaGame.Services.Messaging;
+
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

@@ -179,144 +179,6 @@
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Players",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Wins = table.Column<int>(nullable: false),
-                    Losses = table.Column<int>(nullable: false),
-                    ApplicationUser = table.Column<string>(nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Players", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Players_AspNetUsers_ApplicationUser",
-                        column: x => x.ApplicationUser,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Pawns",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    TitularColor = table.Column<int>(nullable: false),
-                    ReserveColor = table.Column<int>(nullable: false),
-                    Figure = table.Column<int>(nullable: false),
-                    PlayerId = table.Column<string>(nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pawns", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Pawns_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Playgrounds",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    LeftPlayerId = table.Column<string>(nullable: true),
-                    RightPlayerId = table.Column<string>(nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Playgrounds", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Playgrounds_Players_LeftPlayerId",
-                        column: x => x.LeftPlayerId,
-                        principalTable: "Players",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Playgrounds_Players_RightPlayerId",
-                        column: x => x.RightPlayerId,
-                        principalTable: "Players",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Positions",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Color = table.Column<int>(nullable: false),
-                    Figure = table.Column<int>(nullable: false),
-                    PlaygroundId = table.Column<string>(nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Positions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Positions_Playgrounds_PlaygroundId",
-                        column: x => x.PlaygroundId,
-                        principalTable: "Playgrounds",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Connections",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    RelationshipWith = table.Column<string>(nullable: false),
-                    PositionId = table.Column<string>(nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Connections", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Connections_Positions_PositionId",
-                        column: x => x.PositionId,
-                        principalTable: "Positions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Damas",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    FirstPositionId = table.Column<string>(nullable: true),
-                    SecondPositionId = table.Column<string>(nullable: true),
-                    ThirdPositionId = table.Column<string>(nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Damas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Damas_Positions_FirstPositionId",
-                        column: x => x.FirstPositionId,
-                        principalTable: "Positions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Damas_Positions_SecondPositionId",
-                        column: x => x.SecondPositionId,
-                        principalTable: "Positions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Damas_Positions_ThirdPositionId",
-                        column: x => x.ThirdPositionId,
-                        principalTable: "Positions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -367,53 +229,6 @@
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Connections_PositionId",
-                table: "Connections",
-                column: "PositionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Damas_FirstPositionId",
-                table: "Damas",
-                column: "FirstPositionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Damas_SecondPositionId",
-                table: "Damas",
-                column: "SecondPositionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Damas_ThirdPositionId",
-                table: "Damas",
-                column: "ThirdPositionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pawns_PlayerId",
-                table: "Pawns",
-                column: "PlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Players_ApplicationUser",
-                table: "Players",
-                column: "ApplicationUser",
-                unique: true,
-                filter: "[ApplicationUser] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Playgrounds_LeftPlayerId",
-                table: "Playgrounds",
-                column: "LeftPlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Playgrounds_RightPlayerId",
-                table: "Playgrounds",
-                column: "RightPlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Positions_PlaygroundId",
-                table: "Positions",
-                column: "PlaygroundId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
@@ -437,28 +252,10 @@
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Connections");
-
-            migrationBuilder.DropTable(
-                name: "Damas");
-
-            migrationBuilder.DropTable(
-                name: "Pawns");
-
-            migrationBuilder.DropTable(
                 name: "Settings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Positions");
-
-            migrationBuilder.DropTable(
-                name: "Playgrounds");
-
-            migrationBuilder.DropTable(
-                name: "Players");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

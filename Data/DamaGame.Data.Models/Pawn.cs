@@ -1,33 +1,22 @@
 ﻿namespace DamaGame.Data.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
 
+    using DamaGame.Data.Common.Models;
     using DamaGame.Data.Models.Enums;
 
-    public class Pawn
+    public class Pawn : BaseDeletableModel<string>
     {
-        public Pawn(Color titularColor, Color reserveColor, FigurePawn figure)
+        public Pawn()
         {
             this.Id = Guid.NewGuid().ToString();
-
-            this.TitularColor = titularColor;
-
-            this.ReserveColor = reserveColor;
-
-            this.Figure = figure;
         }
 
-        public string Id { get; set; }
+        public Color TitularColor { get; set; } = Color.Sans;
 
-        [Required]
-        public Color TitularColor { get; set; }
+        public Color ReserveColor { get; set; } = Color.Sans;
 
-        [Required]
-        public Color ReserveColor { get; set; }
-
-        [Required]
-        public FigurePawn Figure { get; set; }
+        public FigurePawn Figure { get; set; } = FigurePawn.FigureCircle;
 
         public virtual Player Player { get; set; }
     }

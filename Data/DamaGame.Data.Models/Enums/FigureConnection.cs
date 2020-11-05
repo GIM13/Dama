@@ -1,6 +1,6 @@
-﻿namespace DamaGame.Data.Models.Enums
+﻿namespace DamaGame.Data.Models
 {
-    public enum FigureLine
+    public enum FigureConnection
     {
         FigureHorizontalLine = 1,
         FigureVerticalLine = 2,

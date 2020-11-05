@@ -1,4 +1,5 @@
-﻿namespace DamaGame.Data.Models
+﻿// ReSharper disable VirtualMemberCallInConstructor
+namespace DamaGame.Data.Models
 {
     using System;
 

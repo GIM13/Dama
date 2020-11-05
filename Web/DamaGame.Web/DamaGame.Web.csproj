@@ -40,4 +40,12 @@
     <ProjectReference Include="..\DamaGame.Web.Infrastructure\DamaGame.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\DamaGame.Web.ViewModels\DamaGame.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Connections\" />
+    <Folder Include="Views\Damas\" />
+    <Folder Include="Views\Pawns\" />
+    <Folder Include="Views\Playgrounds\" />
+    <Folder Include="Views\Positions\" />
+  </ItemGroup>
 </Project>
