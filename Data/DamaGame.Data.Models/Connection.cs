@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations;
 
     using DamaGame.Data.Common.Models;
-    using DamaGame.Data.Models.Enums;
 
     public class Connection : BaseDeletableModel<string>
     {

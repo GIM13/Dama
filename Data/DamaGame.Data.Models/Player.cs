@@ -15,6 +15,7 @@
         }
 
         [Required]
+        [StringLength(16, MinimumLength = 4)]
         public string Name { get; set; }
 
         public int Wins { get; set; }
