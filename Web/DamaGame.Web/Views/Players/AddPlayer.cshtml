@@ -12,31 +12,20 @@
             <div class="col-lg-10 col-xl-9 mx-auto">
                 <div class="card-body">
                     <h5 class="card-title text-center">Create a player</h5>
-                    <form method="post" class="form-signin">
-                        <div class="form-label-group">
-                            @*<input type="text" id="inputUserame" class="form-control" placeholder="Player name" required autofocus>*@
-                            <input asp-for="Name" class="form-control" placeholder="Player name" required />
-                            <label asp-for="Name">Player name (between 4 and 16 characters)</label>
-                        </div>
 
-                        <div class="form-label-group">
-                            @*<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>*@
-                            <select asp-for="TitularColor" class="form-control" asp-items="@Html.GetEnumSelectList<Color>()" ></select>
-                            <label asp-for="TitularColor">Titular color</label>
+                    <form class="mx-auto w-50" method="post">
+                        <div class="form-group">
+                            <div class="d-flex justify-content-start">
+                                <label for="name" class="h4 mb-2 text-dark">Name</label>
+                            </div>
+                            <input type="text" class="form-control"  name="Name" />
                         </div>
+                        <div class="d-flex justify-content-center">
 
-                        <div class="form-label-group">
-                            <select asp-for="ReserveColor" class="form-control" asp-items="@Html.GetEnumSelectList<Color>()" placeholder="Reserve Color" required ></select>
-                            <label asp-for="ReserveColor">Reserve color</label>
+                            <a asp-action="InsertPlayer" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add player</a>
                         </div>
-
-                        <div class="form-label-group">
-                            <select asp-for="Figure" class="form-control" asp-items="@Html.GetEnumSelectList<FigurePawn>()" placeholder="Figure" required ></select>
-                            <label asp-for="Figure">Figure</label>
-                        </div>
-
-                        <button asp-action="InsertPlayer" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add player</button>
                     </form>
+
                 </div>
             </div>
         </div>
