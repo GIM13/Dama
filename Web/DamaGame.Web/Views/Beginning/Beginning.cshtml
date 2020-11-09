@@ -1,0 +1,20 @@
+@using DamaGame.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@model ApplicationUser
+
+@{
+    this.ViewData["Title"] = "Start a game";
+}
+@if (!this.SignInManager.IsSignedIn(this.User))
+{
+    <h1 class="card-title text-center p-5 text-primary">Please login to continue</h1>
+
+    <p class="card-title text-center p-5 text-primary">If you do not have an account please register</p>
+}
+else 
+{
+    <a class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">Add new player</a>
+}
+
+

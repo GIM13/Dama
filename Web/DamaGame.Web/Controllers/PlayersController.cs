@@ -4,9 +4,9 @@
 
     using DamaGame.Data.Common.Repositories;
     using DamaGame.Data.Models;
-    using DamaGame.Data.Models.Enums;
     using DamaGame.Services.Data;
     using DamaGame.Web.ViewModels.Players;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class PlayersController : BaseController
@@ -14,6 +14,8 @@
         private readonly IPlayersService playersService;
 
         private readonly IDeletableEntityRepository<Player> repository;
+
+        private readonly UserManager<ApplicationUser> userManager;
 
         public PlayersController(IPlayersService playersService, IDeletableEntityRepository<Player> repository)
         {
@@ -27,11 +29,10 @@
         }
 
         [HttpPost]
-        public IActionResult AddPlayer(string name)
+        public async Task<IActionResult> AddPlayerAsync(PlayerInputViewModel input)
         {
-            InsertPlayer(name);
-
-            return this.View();
+            await this.InsertPlayer(input);
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         public IActionResult Index()
@@ -41,26 +42,27 @@
             return this.View(model);
         }
 
-        public async Task<IActionResult> InsertPlayer(string name)
+        public async Task<IActionResult> InsertPlayer(PlayerInputViewModel input)
         {
-            // var pawn = new Pawn
-            // {
-            //    TitularColor = input.TitularColor,
-            //    ReserveColor = input.ReserveColor,
-            //    Figure = input.Figure,
-            // };
+            var pawn = new Pawn
+            {
+                TitularColor = input.TitularColor,
+                ReserveColor = input.ReserveColor,
+                Figure = input.Figure,
+            };
 
-            var player = new Player { Name = name };
+            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
 
-            // for (int i = 0; i < 9; i++)
-            // {
-            //    player.Pawns.Add(pawn);
-            // }
+            var player = new Player { Name = input.Name, User = user};
+
+            for (int i = 0; i < 9; i++)
+            {
+                player.Pawns.Add(pawn);
+            }
 
             await this.repository.AddAsync(player);
             await this.repository.SaveChangesAsync();
-
-            return this.RedirectToAction(nameof(this.Index));
+            return null;
         }
     }
 }

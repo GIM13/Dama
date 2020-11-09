@@ -6,16 +6,11 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    public class HomeController : BaseController
+    public class BeginningController : BaseController
     {
-        public IActionResult Index()
-        {
-            return this.View();
-        }
-
         public IActionResult Beginning()
         {
-            return this.View();
+            return this.View("Beginning");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

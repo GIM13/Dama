@@ -7,7 +7,7 @@
     using DamaGame.Data.Models;
     using DamaGame.Services.Data;
     using DamaGame.Web.ViewModels.Settings;
-
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
@@ -15,6 +15,8 @@
         private readonly ISettingsService settingsService;
 
         private readonly IDeletableEntityRepository<Setting> repository;
+
+        private readonly UserManager<ApplicationUser> userManager;
 
         public SettingsController(ISettingsService settingsService, IDeletableEntityRepository<Setting> repository)
         {
@@ -26,6 +28,9 @@
         {
             var settings = this.settingsService.GetAll<SettingViewModel>();
             var model = new SettingsListViewModel { Settings = settings };
+
+            var user = this.userManager.GetUserAsync(this.User);
+
             return this.View(model);
         }
 

@@ -11,20 +11,41 @@
         <div class="row">
             <div class="col-lg-10 col-xl-9 mx-auto">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Create a player</h5>
+                    <h5 class="card-title text-center text-primary">Create a player</h5>
+                    <form method="post" class="form-signin">
 
-                    <form class="mx-auto w-50" method="post">
+                        <div class="form-label-group">
+                            <input asp-for="Name" class="form-control" placeholder="Player name" required />
+                            <label asp-for="Name">Player name (between 4 and 16 characters)</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <h7 class="card-title text-center text-primary">Titular color</h7>
+                            <select asp-for="TitularColor" class="form-control" asp-items="@Html.GetEnumSelectList<Color>()" required></select>
+                        </div>
+
+                        <div class="form-label-group">
+                            <h7 class="card-title text-center text-primary">Reserve color</h7>
+                            <select asp-for="ReserveColor" class="form-control" asp-items="@Html.GetEnumSelectList<Color>()" placeholder="Reserve Color" required></select>
+                        </div>
+
+                        <div class="form-label-group">
+                            <h7 class="card-title text-center text-primary">Figure</h7>
+                            <select asp-for="Figure" class="form-control" asp-items="@Html.GetEnumSelectList<FigurePawn>()" placeholder="Figure" required></select>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-block btn-primary text-white mb-3">Add player</button>
+                        </div>
+                    </form>
+                    <!--<form class="mx-auto w-50" method="post">
                         <div class="form-group">
                             <div class="d-flex justify-content-start">
                                 <label for="name" class="h4 mb-2 text-dark">Name</label>
-                            </div>
-                            <input type="text" class="form-control"  name="Name" />
+                            </div>-->
+                    @*<input type="text" class="form-control"  name="Name" />*@
+                    <!--<input asp-for="Name" type="text" class="form-control" />
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-block btn-primary text-white mb-3" >Add player</button>
-                            @*<a asp-action="InsertPlayer" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add player</a>*@
-                        </div>
-                    </form>
+                    </form>-->
 
                 </div>
             </div>
