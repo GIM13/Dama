@@ -1,8 +1,10 @@
 ﻿namespace DamaGame.Services.Data
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using DamaGame.Web.ViewModels.Players;
+    using Microsoft.AspNetCore.Mvc;
 
     public interface IPlayersService
     {
@@ -10,6 +12,6 @@
 
         IEnumerable<T> GetAll<T>();
 
-        void InsertPlayer(PlayerInputViewModel input);
+        Task<IActionResult> InsertPlayer(PlayerInputViewModel input);
     }
 }

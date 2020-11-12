@@ -164,7 +164,8 @@ namespace DamaGame.Data.Migrations
 
                     b.Property<string>("RelationshipWith")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(2)")
+                        .HasMaxLength(2);
 
                     b.Property<int>("Weight")
                         .HasColumnType("int");
@@ -280,7 +281,8 @@ namespace DamaGame.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(16)")
+                        .HasMaxLength(16);
 
                     b.Property<int>("Wins")
                         .HasColumnType("int");

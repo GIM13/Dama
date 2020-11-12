@@ -16,8 +16,6 @@
 
         private readonly IDeletableEntityRepository<Setting> repository;
 
-        private readonly UserManager<ApplicationUser> userManager;
-
         public SettingsController(ISettingsService settingsService, IDeletableEntityRepository<Setting> repository)
         {
             this.settingsService = settingsService;
@@ -28,8 +26,6 @@
         {
             var settings = this.settingsService.GetAll<SettingViewModel>();
             var model = new SettingsListViewModel { Settings = settings };
-
-            var user = this.userManager.GetUserAsync(this.User);
 
             return this.View(model);
         }

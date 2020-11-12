@@ -9,7 +9,7 @@
 
 @foreach (var player in this.Model.Players)
 {
-<div>@player.Name  </div>
+    <h6>@player.Name </h6> 
 }
 
 <a class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">Add new player</a>

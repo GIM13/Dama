@@ -13,11 +13,13 @@
         }
 
         [Required]
+        [StringLength(2, MinimumLength = 2)]
         public string RelationshipWith { get; set; }
 
+        [Range(1, 32)]
         public int Weight { get; set; }
 
-        public FigureConnection Figure { get; set; } = FigureConnection.FigureHorizontalLine;
+        public FigureConnection Figure { get; set; }
 
         public virtual Position Position { get; set; }
     }

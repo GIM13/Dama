@@ -2,19 +2,27 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DamaGame.Data.Common.Repositories;
     using DamaGame.Data.Models;
     using DamaGame.Services.Mapping;
     using DamaGame.Web.ViewModels.Players;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
 
     public class PlayersService : IPlayersService
     {
         private readonly IDeletableEntityRepository<Player> playersRepository;
 
-        public PlayersService(IDeletableEntityRepository<Player> settingsRepository)
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public PlayersService(
+            IDeletableEntityRepository<Player> playersRepository,
+            UserManager<ApplicationUser> userManager)
         {
-            this.playersRepository = settingsRepository;
+            this.playersRepository = playersRepository;
+            this.userManager = userManager;
         }
 
         public int GetCount()
@@ -27,7 +35,7 @@
             return this.playersRepository.All().To<T>().ToList();
         }
 
-        public void InsertPlayer(PlayerInputViewModel input)
+        public Task<IActionResult> InsertPlayer(PlayerInputViewModel input)
         {
             var pawn = new Pawn
             {
@@ -36,15 +44,18 @@
                 Figure = input.Figure,
             };
 
-            var player = new Player { Name = input.Name };
+            // var user = await this.userManager.GetUserAsync(this.User);
 
-            for (int i = 0; i < 9; i++)
-            {
-                player.Pawns.Add(pawn);
-            }
+            // var player = new Player { Name = input.Name, User = user };
 
-            this.playersRepository.AddAsync(player);
-            this.playersRepository.SaveChangesAsync();
+            // for (int i = 0; i < 9; i++)
+            // {
+            //    player.Pawns.Add(pawn);
+            // }
+
+            // await this.playersRepository.AddAsync(player);
+            // await this.playersRepository.SaveChangesAsync();
+            return null;
         }
     }
 }

@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DamaGame.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191224074400_InitialCreate")]
+    [Migration("20201112124544_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -139,6 +139,240 @@ namespace DamaGame.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Connection", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Figure")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PositionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RelationshipWith")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(2)")
+                        .HasMaxLength(2);
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PositionId");
+
+                    b.ToTable("Connections");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Dama", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstPositionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SecondPositionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ThirdPositionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FirstPositionId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("SecondPositionId");
+
+                    b.HasIndex("ThirdPositionId");
+
+                    b.ToTable("Damas");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Pawn", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Figure")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PlayerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ReserveColor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TitularColor")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("Pawns");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Player", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApplicationUser")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Losses")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(16)")
+                        .HasMaxLength(16);
+
+                    b.Property<int>("Wins")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUser");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Playground", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LeftPlayerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RightPlayerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("LeftPlayerId");
+
+                    b.HasIndex("RightPlayerId");
+
+                    b.ToTable("Playgrounds");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Position", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Color")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Figure")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(2)")
+                        .HasMaxLength(2);
+
+                    b.Property<string>("PlaygroundId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("StatePosition")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PlaygroundId");
+
+                    b.ToTable("Positions");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Setting", b =>
@@ -275,6 +509,60 @@ namespace DamaGame.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Connection", b =>
+                {
+                    b.HasOne("DamaGame.Data.Models.Position", "Position")
+                        .WithMany("Connections")
+                        .HasForeignKey("PositionId");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Dama", b =>
+                {
+                    b.HasOne("DamaGame.Data.Models.Position", "FirstPosition")
+                        .WithMany()
+                        .HasForeignKey("FirstPositionId");
+
+                    b.HasOne("DamaGame.Data.Models.Position", "SecondPosition")
+                        .WithMany()
+                        .HasForeignKey("SecondPositionId");
+
+                    b.HasOne("DamaGame.Data.Models.Position", "ThirdPosition")
+                        .WithMany()
+                        .HasForeignKey("ThirdPositionId");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Pawn", b =>
+                {
+                    b.HasOne("DamaGame.Data.Models.Player", "Player")
+                        .WithMany("Pawns")
+                        .HasForeignKey("PlayerId");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Player", b =>
+                {
+                    b.HasOne("DamaGame.Data.Models.ApplicationUser", "User")
+                        .WithMany("Players")
+                        .HasForeignKey("ApplicationUser");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Playground", b =>
+                {
+                    b.HasOne("DamaGame.Data.Models.Player", "LeftPlayer")
+                        .WithMany()
+                        .HasForeignKey("LeftPlayerId");
+
+                    b.HasOne("DamaGame.Data.Models.Player", "RightPlayer")
+                        .WithMany()
+                        .HasForeignKey("RightPlayerId");
+                });
+
+            modelBuilder.Entity("DamaGame.Data.Models.Position", b =>
+                {
+                    b.HasOne("DamaGame.Data.Models.Playground", "Playground")
+                        .WithMany("Positions")
+                        .HasForeignKey("PlaygroundId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

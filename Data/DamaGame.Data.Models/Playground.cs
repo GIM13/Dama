@@ -17,6 +17,7 @@
             this.FillingThePositions();
         }
 
+
         public virtual Player LeftPlayer { get; set; }
 
         public virtual Player RightPlayer { get; set; }
@@ -77,6 +78,7 @@
             this.Positions[9] = new Position { Name = "D1" };
             this.Positions[9].Connections.Add(new Connection() { RelationshipWith = "A1" });
             this.Positions[9].Connections.Add(new Connection() { RelationshipWith = "H1" });
+            this.Positions[9].Connections.Add(new Connection() { RelationshipWith = "D2" });
             this.Positions[10] = new Position { Name = "D2" };
             this.Positions[10].Connections.Add(new Connection() { RelationshipWith = "D1" });
             this.Positions[10].Connections.Add(new Connection() { RelationshipWith = "B2" });
@@ -85,10 +87,12 @@
             this.Positions[11] = new Position { Name = "D3" };
             this.Positions[11].Connections.Add(new Connection() { RelationshipWith = "C3" });
             this.Positions[11].Connections.Add(new Connection() { RelationshipWith = "F3" });
+            this.Positions[11].Connections.Add(new Connection() { RelationshipWith = "D2" });
 
             this.Positions[12] = new Position { Name = "E6" };
             this.Positions[12].Connections.Add(new Connection() { RelationshipWith = "C6" });
             this.Positions[12].Connections.Add(new Connection() { RelationshipWith = "F6" });
+            this.Positions[12].Connections.Add(new Connection() { RelationshipWith = "E7" });
             this.Positions[13] = new Position { Name = "E7" };
             this.Positions[13].Connections.Add(new Connection() { RelationshipWith = "E6" });
             this.Positions[13].Connections.Add(new Connection() { RelationshipWith = "E8" });
@@ -97,6 +101,7 @@
             this.Positions[14] = new Position { Name = "E8" };
             this.Positions[14].Connections.Add(new Connection() { RelationshipWith = "A8" });
             this.Positions[14].Connections.Add(new Connection() { RelationshipWith = "H8" });
+            this.Positions[14].Connections.Add(new Connection() { RelationshipWith = "E7" });
 
             this.Positions[15] = new Position { Name = "F3" };
             this.Positions[15].Connections.Add(new Connection() { RelationshipWith = "F5" });

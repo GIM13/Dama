@@ -13,14 +13,18 @@
     {
         private readonly IPlayersService playersService;
 
-        private readonly IDeletableEntityRepository<Player> repository;
+        private readonly IDeletableEntityRepository<Player> playersRepository;
 
         private readonly UserManager<ApplicationUser> userManager;
 
-        public PlayersController(IPlayersService playersService, IDeletableEntityRepository<Player> repository)
+        public PlayersController(
+            IPlayersService playersService,
+            IDeletableEntityRepository<Player> playersRepository,
+            UserManager<ApplicationUser> userManager)
         {
             this.playersService = playersService;
-            this.repository = repository;
+            this.playersRepository = playersRepository;
+            this.userManager = userManager;
         }
 
         public IActionResult AddPlayer()
@@ -31,6 +35,7 @@
         [HttpPost]
         public async Task<IActionResult> AddPlayerAsync(PlayerInputViewModel input)
         {
+            // await this.playersService.InsertPlayer(input);
             await this.InsertPlayer(input);
             return this.RedirectToAction(nameof(this.Index));
         }
@@ -51,17 +56,17 @@
                 Figure = input.Figure,
             };
 
-            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
+            var user = await this.userManager.GetUserAsync(this.User);
 
-            var player = new Player { Name = input.Name, User = user};
+            var player = new Player { Name = input.Name, User = user };
 
             for (int i = 0; i < 9; i++)
             {
                 player.Pawns.Add(pawn);
             }
 
-            await this.repository.AddAsync(player);
-            await this.repository.SaveChangesAsync();
+            await this.playersRepository.AddAsync(player);
+            await this.playersRepository.SaveChangesAsync();
             return null;
         }
     }
