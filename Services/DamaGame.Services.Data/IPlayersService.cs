@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using DamaGame.Data.Models;
     using DamaGame.Web.ViewModels.Players;
     using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,8 @@
 
         IEnumerable<T> GetAll<T>();
 
-        Task<IActionResult> InsertPlayer(PlayerInputViewModel input);
+        Task InsertPlayer(PlayerInputViewModel input, ApplicationUser user);
+
+        Task<string> RemovePlayer(string name);
     }
 }

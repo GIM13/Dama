@@ -17,7 +17,6 @@
             this.FillingThePositions();
         }
 
-
         public virtual Player LeftPlayer { get; set; }
 
         public virtual Player RightPlayer { get; set; }

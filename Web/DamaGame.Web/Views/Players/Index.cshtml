@@ -2,14 +2,12 @@
 @model PlayersListViewModel
 
 @{
-    this.ViewData["Title"] = "Players";
+    this.ViewData["Title"] = "All Players";
 }
 
 <h1>@this.ViewData["Title"]</h1>
 
-@foreach (var player in this.Model.Players)
+@foreach (var player in this.Model.PlayersUser)
 {
-    <h6>@player.Name </h6> 
+<h6>Player-@player.Name  ....  Wins-@player.Wins  ....  Losses-@player.Losses</h6> 
 }
-
-<a class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">Add new player</a>

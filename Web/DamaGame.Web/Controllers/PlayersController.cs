@@ -1,5 +1,6 @@
 ﻿namespace DamaGame.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using DamaGame.Data.Common.Repositories;
@@ -35,39 +36,34 @@
         [HttpPost]
         public async Task<IActionResult> AddPlayerAsync(PlayerInputViewModel input)
         {
-            // await this.playersService.InsertPlayer(input);
-            await this.InsertPlayer(input);
-            return this.RedirectToAction(nameof(this.Index));
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            await this.playersService.InsertPlayer(input, user);
+
+            return this.RedirectToAction("Beginning", "Beginning");
+        }
+
+        public IActionResult RemovePlayer()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemovePlayerAsync(string name)
+        {
+            await this.playersService.RemovePlayer(name);
+
+            return this.RedirectToAction("Beginning", "Beginning");
         }
 
         public IActionResult Index()
         {
-            var players = this.playersService.GetAll<PlayerInputViewModel>();
-            var model = new PlayersListViewModel { Players = players };
+            var players = this.playersService.GetAll<PlayerViewModel>()
+                                             .OrderByDescending(x => x.Wins - x.Losses);
+
+            var model = new PlayersListViewModel { PlayersUser = players };
+
             return this.View(model);
-        }
-
-        public async Task<IActionResult> InsertPlayer(PlayerInputViewModel input)
-        {
-            var pawn = new Pawn
-            {
-                TitularColor = input.TitularColor,
-                ReserveColor = input.ReserveColor,
-                Figure = input.Figure,
-            };
-
-            var user = await this.userManager.GetUserAsync(this.User);
-
-            var player = new Player { Name = input.Name, User = user };
-
-            for (int i = 0; i < 9; i++)
-            {
-                player.Pawns.Add(pawn);
-            }
-
-            await this.playersRepository.AddAsync(player);
-            await this.playersRepository.SaveChangesAsync();
-            return null;
         }
     }
 }

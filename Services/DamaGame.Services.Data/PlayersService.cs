@@ -35,7 +35,7 @@
             return this.playersRepository.All().To<T>().ToList();
         }
 
-        public Task<IActionResult> InsertPlayer(PlayerInputViewModel input)
+        public async Task InsertPlayer(PlayerInputViewModel input, ApplicationUser user)
         {
             var pawn = new Pawn
             {
@@ -44,17 +44,32 @@
                 Figure = input.Figure,
             };
 
-            // var user = await this.userManager.GetUserAsync(this.User);
+            var player = new Player { Name = input.Name, User = user };
 
-            // var player = new Player { Name = input.Name, User = user };
+            for (int i = 0; i < 9; i++)
+            {
+                player.Pawns.Add(pawn);
+            }
 
-            // for (int i = 0; i < 9; i++)
-            // {
-            //    player.Pawns.Add(pawn);
-            // }
+            await this.playersRepository.AddAsync(player);
+            await this.playersRepository.SaveChangesAsync();
+        }
 
-            // await this.playersRepository.AddAsync(player);
-            // await this.playersRepository.SaveChangesAsync();
+        public async Task<string> RemovePlayer(string name)
+        {
+            if (!this.playersRepository.All().Any(x => x.Name == name))
+            {
+                return "There is no such player";
+            }
+
+            var player = this.playersRepository
+                .All()
+                .Where(x => x.Name == name)
+                .FirstOrDefault();
+
+            this.playersRepository.Delete(player);
+            await this.playersRepository.SaveChangesAsync();
+
             return null;
         }
     }
