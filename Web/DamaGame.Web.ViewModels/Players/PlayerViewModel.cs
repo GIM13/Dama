@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    using AutoMapper;
     using DamaGame.Data.Models;
     using DamaGame.Services.Mapping;
 
@@ -15,7 +14,6 @@
 
         public int Losses { get; set; }
 
-        [ForeignKey("ApplicationUser")]
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Pawn> Pawns { get; set; }

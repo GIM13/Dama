@@ -6,9 +6,11 @@
     using DamaGame.Data.Models;
     using DamaGame.Services.Data;
     using DamaGame.Web.ViewModels.Players;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class BeginningController : BaseController
     {
         private readonly IPlayersService playersService;

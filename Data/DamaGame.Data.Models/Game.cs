@@ -1,6 +1,7 @@
 ﻿namespace DamaGame.Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using DamaGame.Data.Common.Models;
 
@@ -14,6 +15,8 @@
 
             this.RightPlayerId = rightPlayerId;
         }
+
+        public string PlaygroundId { get; set; }
 
         public virtual Playground Playground { get; set; } = new Playground();
 

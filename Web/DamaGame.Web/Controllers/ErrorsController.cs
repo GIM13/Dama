@@ -1,7 +1,9 @@
 ﻿namespace DamaGame.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class ErrorsController : BaseController
     {
         public IActionResult RemovePlayerError()

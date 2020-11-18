@@ -7,8 +7,10 @@
     using DamaGame.Data.Models;
     using DamaGame.Services.Data;
     using DamaGame.Web.ViewModels.Settings;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class SettingsController : BaseController
     {
         private readonly ISettingsService settingsService;

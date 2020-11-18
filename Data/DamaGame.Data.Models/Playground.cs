@@ -1,6 +1,7 @@
 ﻿namespace DamaGame.Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using DamaGame.Data.Common.Models;
 
@@ -12,6 +13,8 @@
 
             this.FillingThePositions();
         }
+
+        public string GameId { get; set; }
 
         public virtual Game Game { get; set; }
 

@@ -1,17 +1,17 @@
 ﻿namespace DamaGame.Web.Controllers
 {
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
 
     using DamaGame.Data.Common.Repositories;
     using DamaGame.Data.Models;
     using DamaGame.Services.Data;
-    using DamaGame.Web.ViewModels;
     using DamaGame.Web.ViewModels.Players;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class PlayersController : BaseController
     {
         private readonly IPlayersService playersService;
