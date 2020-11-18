@@ -12,7 +12,6 @@
         public Player()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Pawns = new List<Pawn>();
         }
 
         [Required]
@@ -26,6 +25,6 @@
         [ForeignKey("ApplicationUser")]
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<Pawn> Pawns { get; set; }
+        public virtual ICollection<Pawn> Pawns { get; set; } = new List<Pawn>();
     }
 }

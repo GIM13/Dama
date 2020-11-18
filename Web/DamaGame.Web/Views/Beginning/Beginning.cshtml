@@ -8,8 +8,6 @@
     this.ViewData["Title"] = "Players";
 }
 
-<h1>@this.ViewData["Title"]</h1>
-
 @if (!this.SignInManager.IsSignedIn(this.User))
 {
     <h1 class="card-title text-center p-5 text-primary">Please login to continue</h1>
@@ -18,12 +16,18 @@
 }
 else
 {
+    <h1>@this.ViewData["Title"]</h1>
+
     @foreach (var player in this.Model.PlayersUser)
     {
-        <h6>Player-@player.Name  ....  Wins-@player.Wins  ....  Losses-@player.Losses  ....  @player.Pawns.FirstOrDefault().Figure  ....  @player.Pawns.FirstOrDefault().TitularColor  ....  @player.Pawns.FirstOrDefault().ReserveColor</h6>
+        <h6>Player-@player.Name  _______  Wins-@player.Wins  _______  Losses-@player.Losses  _______  @player.Pawns.FirstOrDefault().Figure  _______  @player.Pawns.FirstOrDefault().TitularColor  &  @player.Pawns.FirstOrDefault().ReserveColor</h6>
+
+        <a class="btn btn-primary" asp-controller="Players" asp-action="ChoosePlayer">Choose</a>
+
+        <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
     }
 
     <a class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">Add new player</a>
 
-    <a class="btn btn-primary" asp-controller="Players" asp-action="RemovePlayer">Remove player</a>
+    <a class="btn btn-danger" asp-controller="Players" asp-action="RemovePlayer">Remove player</a>
 }

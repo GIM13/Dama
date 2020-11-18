@@ -6,20 +6,14 @@
 
     public class Playground : BaseDeletableModel<string>
     {
-        public Playground(string leftPlayerId, string rightPlayerId)
+        public Playground()
         {
             this.Id = Guid.NewGuid().ToString();
-
-            this.LeftPlayer.Id = leftPlayerId;
-
-            this.RightPlayer.Id = rightPlayerId;
 
             this.FillingThePositions();
         }
 
-        public virtual Player LeftPlayer { get; set; }
-
-        public virtual Player RightPlayer { get; set; }
+        public virtual Game Game { get; set; }
 
         public virtual Position[] Positions { get; set; } = new Position[24];
 

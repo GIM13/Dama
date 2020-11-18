@@ -7,7 +7,6 @@
     using DamaGame.Data.Models;
     using DamaGame.Services.Data;
     using DamaGame.Web.ViewModels.Settings;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController

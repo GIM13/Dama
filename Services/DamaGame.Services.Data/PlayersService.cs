@@ -8,21 +8,15 @@
     using DamaGame.Data.Models;
     using DamaGame.Services.Mapping;
     using DamaGame.Web.ViewModels.Players;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
 
     public class PlayersService : IPlayersService
     {
         private readonly IDeletableEntityRepository<Player> playersRepository;
 
-        private readonly UserManager<ApplicationUser> userManager;
-
         public PlayersService(
-            IDeletableEntityRepository<Player> playersRepository,
-            UserManager<ApplicationUser> userManager)
+            IDeletableEntityRepository<Player> playersRepository)
         {
             this.playersRepository = playersRepository;
-            this.userManager = userManager;
         }
 
         public int GetCount()
@@ -55,13 +49,8 @@
             await this.playersRepository.SaveChangesAsync();
         }
 
-        public async Task<string> RemovePlayer(string name)
+        public async Task RemovePlayer(string name)
         {
-            if (!this.playersRepository.All().Any(x => x.Name == name))
-            {
-                return "There is no such player";
-            }
-
             var player = this.playersRepository
                 .All()
                 .Where(x => x.Name == name)
@@ -69,8 +58,6 @@
 
             this.playersRepository.Delete(player);
             await this.playersRepository.SaveChangesAsync();
-
-            return null;
         }
     }
 }

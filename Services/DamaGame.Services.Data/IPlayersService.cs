@@ -15,6 +15,6 @@
 
         Task InsertPlayer(PlayerInputViewModel input, ApplicationUser user);
 
-        Task<string> RemovePlayer(string name);
+        Task RemovePlayer(string name);
     }
 }
