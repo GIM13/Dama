@@ -1,33 +1,11 @@
-﻿@using DamaGame.Web.ViewModels.Players
-@using DamaGame.Data.Models
+﻿@using DamaGame.Data.Models
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
-@model PlayersListViewModel
 
 @{
     this.ViewData["Title"] = "Beginning";
 }
 
-@if (!this.SignInManager.IsSignedIn(this.User))
-{
-    <h1 class="card-title text-center p-5 text-primary">Please login to continue</h1>
+<h1 class="card-title text-center p-5 text-primary">Please login to continue</h1>
 
-    <p class="card-title text-center p-5 text-primary">If you do not have an account please register</p>
-}
-else
-{
-    <h1>@this.ViewData["Title"]</h1>
-
-    @foreach (var player in this.Model.PlayersUser)
-    {
-        <h6>Player-@player.Name  _______  Wins-@player.Wins  _______  Losses-@player.Losses  _______  @player.Pawns.FirstOrDefault().Figure  _______  @player.Pawns.FirstOrDefault().TitularColor  &  @player.Pawns.FirstOrDefault().ReserveColor</h6>
-
-        <a class="btn btn-primary" asp-controller="Players" asp-action="ChoosePlayer">Choose</a>
-
-        <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
-    }
-
-    <a class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">Add new player</a>
-
-    <a class="btn btn-danger" asp-controller="Players" asp-action="RemovePlayer">Remove player</a>
-}
+<p class="card-title text-center p-5 text-primary">If you do not have an account please register</p>

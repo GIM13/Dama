@@ -5,7 +5,7 @@
 
     using DamaGame.Data.Models;
     using DamaGame.Web.ViewModels.Players;
-    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public interface IPlayersService
     {
@@ -16,5 +16,7 @@
         Task InsertPlayer(PlayerInputViewModel input, ApplicationUser user);
 
         Task RemovePlayer(string name);
+
+        IEnumerable<SelectListItem> GetAllPlayersTheUser(ApplicationUser user);
     }
 }

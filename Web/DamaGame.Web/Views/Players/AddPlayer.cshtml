@@ -20,17 +20,17 @@
                         </div>
 
                         <div class="form-label-group">
-                            <h7 class="card-title text-center text-primary">Titular color</h7>
-                            <select asp-for="TitularColor" class="form-control" asp-items="@Html.GetEnumSelectList<Color>()" required></select>
+                            <h6 class="card-title text-center text-primary">Titular color</h6>
+                            <select asp-for="TitularColor" class="form-control" asp-items="@Html.GetEnumSelectList<Color>()" placeholder="Titular Color"  required></select>
                         </div>
 
                         <div class="form-label-group">
-                            <h7 class="card-title text-center text-primary">Reserve color</h7>
+                            <h6 class="card-title text-center text-primary">Reserve color</h6>
                             <select asp-for="ReserveColor" class="form-control" asp-items="@Html.GetEnumSelectList<Color>()" placeholder="Reserve Color" required></select>
                         </div>
 
                         <div class="form-label-group">
-                            <h7 class="card-title text-center text-primary">Figure</h7>
+                            <h6 class="card-title text-center text-primary">Figure</h6>
                             <select asp-for="Figure" class="form-control" asp-items="@Html.GetEnumSelectList<FigurePawn>()" placeholder="Figure" required></select>
                         </div>
                         <div class="d-flex justify-content-center">

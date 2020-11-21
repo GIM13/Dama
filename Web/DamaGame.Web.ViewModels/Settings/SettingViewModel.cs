@@ -4,7 +4,7 @@
     using DamaGame.Data.Models;
     using DamaGame.Services.Mapping;
 
-    public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
+    public class SettingViewModel : IMapFrom<Setting>, IMapTo<Setting>, IHaveCustomMappings
     {
         public int Id { get; set; }
 

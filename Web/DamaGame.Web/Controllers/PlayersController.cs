@@ -72,6 +72,18 @@
             return this.RedirectToAction("Beginning", "Beginning");
         }
 
+        public async Task<IActionResult> MyPlayers()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var players = this.playersService.GetAll<PlayerViewModel>()
+                                             .Where(x => x.User == user);
+
+            var model = new PlayersListViewModel { PlayersUser = players };
+
+            return this.View(model);
+        }
+
         public IActionResult Index()
         {
             var players = this.playersService.GetAll<PlayerViewModel>()

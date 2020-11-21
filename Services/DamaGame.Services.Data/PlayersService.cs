@@ -8,6 +8,7 @@
     using DamaGame.Data.Models;
     using DamaGame.Services.Mapping;
     using DamaGame.Web.ViewModels.Players;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class PlayersService : IPlayersService
     {
@@ -27,6 +28,17 @@
         public IEnumerable<T> GetAll<T>()
         {
             return this.playersRepository.All().To<T>().ToList();
+        }
+
+        public IEnumerable<SelectListItem> GetAllPlayersTheUser(ApplicationUser user)
+        {
+            var result = this.playersRepository
+                .All()
+                .Where(x => x.User == user)
+                .Select(p => new SelectListItem { Text = p.Name })
+                .ToList();
+
+            return result;
         }
 
         public async Task InsertPlayer(PlayerInputViewModel input, ApplicationUser user)

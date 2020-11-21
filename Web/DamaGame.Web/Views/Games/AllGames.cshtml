@@ -1,0 +1,13 @@
+﻿@using DamaGame.Web.ViewModels.Games
+@model GamesListViewModel
+
+@{
+    this.ViewData["Title"] = "All Games";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+@foreach (var game in this.Model.Games)
+{
+    <h6>Player-@game.LeftPlayer.Name  = VS =  Wins-@game.RightPlayer.Name</h6>
+}

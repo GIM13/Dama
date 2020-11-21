@@ -1,0 +1,17 @@
+﻿@using DamaGame.Web.ViewModels.Players
+@model PlayersListViewModel
+
+@{
+    this.ViewData["Title"] = "My players";
+}
+<h1>Players</h1>
+
+@foreach (var player in this.Model.PlayersUser)
+{
+    <h6>Player-@player.Name  _______  Wins-@player.Wins  _______  Losses-@player.Losses  _______  @player.Pawns.FirstOrDefault().Figure  _______  @player.Pawns.FirstOrDefault().TitularColor  &  @player.Pawns.FirstOrDefault().ReserveColor</h6>
+    <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+}
+
+<a class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">Add new player</a>
+
+<a class="btn btn-danger" asp-controller="Players" asp-action="RemovePlayer">Remove player</a>
