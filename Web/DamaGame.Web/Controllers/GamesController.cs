@@ -57,19 +57,18 @@
                 .Where(g => g.RightPlayer == null)
                 .FirstOrDefault();
 
+            var game = new Game();
+
             if (gameWithoutOpponent != null)
             {
                 gameWithoutOpponent.RightPlayer = player;
             }
             else
             {
-                var game = new Game
-                {
-                    LeftPlayer = player,
-                };
+               game.LeftPlayer = player;
             }
 
-            return this.RedirectToAction("Game");
+            return this.View("Game", game);
         }
 
         public IActionResult Game()

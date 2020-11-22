@@ -49,7 +49,7 @@
 
             await this.playersService.InsertPlayer(input, user);
 
-            return this.RedirectToAction("Beginning", "Beginning");
+            return this.RedirectToAction("MyPlayers");
         }
 
         public IActionResult RemovePlayer()
@@ -69,7 +69,7 @@
 
             await this.playersService.RemovePlayer(name);
 
-            return this.RedirectToAction("Beginning", "Beginning");
+            return this.RedirectToAction("MyPlayers");
         }
 
         public async Task<IActionResult> MyPlayers()
