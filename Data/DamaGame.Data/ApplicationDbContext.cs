@@ -28,6 +28,8 @@
 
         public DbSet<Dama> Damas { get; set; }
 
+        public DbSet<Game> Games { get; set; }
+
         public DbSet<Pawn> Pawns { get; set; }
 
         public DbSet<Player> Players { get; set; }

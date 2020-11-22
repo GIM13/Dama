@@ -14,22 +14,18 @@
     {
         private readonly IPlayersService playersService;
 
-        private readonly IDeletableEntityRepository<Player> playersRepository;
-
-        private readonly IDeletableEntityRepository<Game> gamesRepository;
+        private readonly IGamesService gamesService;
 
         private readonly UserManager<ApplicationUser> userManager;
 
         public GamesController(
             IPlayersService playersService,
-            IDeletableEntityRepository<Game> gameRepository,
-            IDeletableEntityRepository<Player> playersRepository,
+            IGamesService gamesService,
             UserManager<ApplicationUser> userManager)
         {
+            this.gamesService = gamesService;
             this.playersService = playersService;
-            this.gamesRepository = gameRepository;
             this.userManager = userManager;
-            this.playersRepository = playersRepository;
         }
 
         public async Task<IActionResult> NewGameAsync()
@@ -45,30 +41,13 @@
         }
 
         [HttpPost]
-        public IActionResult NewGame(GameStartViewModel gameStartView)
+        public IActionResult NewGameAsync(GameStartViewModel gameStartView)
         {
-            var player = this.playersRepository
-                .All()
-                .Where(p => p.Name == gameStartView.SelectedPlayerName)
-                .FirstOrDefault();
+            var selectedPlayerName = gameStartView.SelectedPlayerName;
 
-            var gameWithoutOpponent = this.gamesRepository
-                .All()
-                .Where(g => g.RightPlayer == null)
-                .FirstOrDefault();
+            this.gamesService.CreateGameAsync(selectedPlayerName);
 
-            var game = new Game();
-
-            if (gameWithoutOpponent != null)
-            {
-                gameWithoutOpponent.RightPlayer = player;
-            }
-            else
-            {
-               game.LeftPlayer = player;
-            }
-
-            return this.View("Game", game);
+            return this.RedirectToAction("Game");
         }
 
         public IActionResult Game()
@@ -78,7 +57,13 @@
 
         public IActionResult AllGames()
         {
-            return this.View();
+            var games = this.gamesService
+                .GetAll<GameViewModel>()
+                .OrderBy(x => x);
+
+            var model = new GamesListViewModel { Games = games };
+
+            return this.View(model);
         }
     }
 }
