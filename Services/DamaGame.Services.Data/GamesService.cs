@@ -7,6 +7,8 @@
     using DamaGame.Data.Common.Repositories;
     using DamaGame.Data.Models;
     using DamaGame.Services.Mapping;
+    using DamaGame.Web.ViewModels.Games;
+    using DamaGame.Web.ViewModels.Players;
 
     public class GamesService : IGamesService
     {
@@ -34,25 +36,33 @@
 
         public async Task CreateGameAsync(string selectedPlayerName)
         {
+            var testplayer = new Player { Name = "WWWWWWW" };
+
+            await this.playersRepository.AddAsync(testplayer);
+            await this.playersRepository.SaveChangesAsync();
+
             var player = this.playersRepository
                 .All()
-                .Where(p => p.Name == selectedPlayerName && p.User != null && p.Pawns.Count != 0)
+                .Where(p => p.Name == selectedPlayerName)
                 .FirstOrDefault();
 
-            var gameWithoutOpponent = this.gamesRepository
+            var game = this.gamesRepository
                 .All()
                 .Where(g => g.RightPlayer == null)
                 .FirstOrDefault();
 
-            if (gameWithoutOpponent != null)
+            if (game != null)
             {
-                gameWithoutOpponent.RightPlayer = player;
+                game.RightPlayer = player;
+
+                await this.gamesRepository.SaveChangesAsync();
             }
             else
             {
-                var game = new Game
+                game = new Game
                 {
                     LeftPlayer = player,
+                    RightPlayer = player,
                 };
 
                 await this.gamesRepository.AddAsync(game);

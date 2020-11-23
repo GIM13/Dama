@@ -5,7 +5,12 @@
     this.ViewData["Title"] = "All Games";
 }
 
-<h1>@this.ViewData["Title"]</h1>
+<h1 class="card-title text-center text-primary">@this.ViewData["Title"]</h1>
+
+@if (this.Model.Games.Count() == 0)
+{
+<h5 class="card-title text-center text-primary">There are currently no active games</h5>
+}
 
 @foreach (var game in this.Model.Games)
 {

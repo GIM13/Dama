@@ -21,6 +21,8 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Player, PlayerViewModel>();
+
+            configuration.CreateMap<PlayerViewModel, Player>();
         }
     }
 }

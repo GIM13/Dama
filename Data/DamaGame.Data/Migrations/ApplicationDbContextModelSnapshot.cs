@@ -256,7 +256,7 @@ namespace DamaGame.Data.Migrations
 
                     b.HasIndex("RightPlayerId");
 
-                    b.ToTable("Game");
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Pawn", b =>

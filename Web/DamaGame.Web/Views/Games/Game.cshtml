@@ -1,11 +1,12 @@
 ﻿@using DamaGame.Data.Models
-@model Game
+@using DamaGame.Web.ViewModels.Games
+@model GameViewModel
 
 @{
     this.ViewData["Title"] = "Game";
 }
 
-<h1>@this.ViewData["Title"] </h1>
+<h1 class="card-title text-center text-primary">@this.ViewData["Title"] </h1>
 
 @this.Model.LeftPlayer.Name
 

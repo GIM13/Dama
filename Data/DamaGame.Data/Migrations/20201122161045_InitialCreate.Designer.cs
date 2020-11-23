@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DamaGame.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201118192324_AddGameTheDb")]
-    partial class AddGameTheDb
+    [Migration("20201122161045_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -240,6 +240,9 @@ namespace DamaGame.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("PlaygroundId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("RightPlayerId")
                         .HasColumnType("nvarchar(450)");
 
@@ -249,9 +252,13 @@ namespace DamaGame.Data.Migrations
 
                     b.HasIndex("LeftPlayerId");
 
+                    b.HasIndex("PlaygroundId")
+                        .IsUnique()
+                        .HasFilter("[PlaygroundId] IS NOT NULL");
+
                     b.HasIndex("RightPlayerId");
 
-                    b.ToTable("Game");
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Pawn", b =>
@@ -343,22 +350,18 @@ namespace DamaGame.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("GameId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Playground")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("Playground")
-                        .IsUnique()
-                        .HasFilter("[Playground] IS NOT NULL");
 
                     b.ToTable("Playgrounds");
                 });
@@ -578,11 +581,17 @@ namespace DamaGame.Data.Migrations
                         .WithMany()
                         .HasForeignKey("LeftPlayerId");
 
+                    b.HasOne("DamaGame.Data.Models.Playground", "Playground")
+                        .WithOne("Game")
+                        .HasForeignKey("DamaGame.Data.Models.Game", "PlaygroundId");
+
                     b.HasOne("DamaGame.Data.Models.Player", "RightPlayer")
                         .WithMany()
                         .HasForeignKey("RightPlayerId");
 
                     b.Navigation("LeftPlayer");
+
+                    b.Navigation("Playground");
 
                     b.Navigation("RightPlayer");
                 });
@@ -603,15 +612,6 @@ namespace DamaGame.Data.Migrations
                         .HasForeignKey("ApplicationUser");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DamaGame.Data.Models.Playground", b =>
-                {
-                    b.HasOne("DamaGame.Data.Models.Game", "Game")
-                        .WithOne("Playground")
-                        .HasForeignKey("DamaGame.Data.Models.Playground", "Playground");
-
-                    b.Navigation("Game");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Position", b =>
@@ -685,11 +685,6 @@ namespace DamaGame.Data.Migrations
                     b.Navigation("Roles");
                 });
 
-            modelBuilder.Entity("DamaGame.Data.Models.Game", b =>
-                {
-                    b.Navigation("Playground");
-                });
-
             modelBuilder.Entity("DamaGame.Data.Models.Player", b =>
                 {
                     b.Navigation("Pawns");
@@ -697,6 +692,8 @@ namespace DamaGame.Data.Migrations
 
             modelBuilder.Entity("DamaGame.Data.Models.Playground", b =>
                 {
+                    b.Navigation("Game");
+
                     b.Navigation("Positions");
                 });
 
