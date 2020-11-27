@@ -25,8 +25,6 @@
 
         public StatePosition StatePosition { get; set; } = StatePosition.FreePosition;
 
-        public virtual Playground Playground { get; set; }
-
         public virtual ICollection<Connection> Connections { get; set; } = new HashSet<Connection>();
     }
 }

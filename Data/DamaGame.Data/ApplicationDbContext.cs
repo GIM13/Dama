@@ -61,11 +61,6 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Game>()
-                   .HasOne<Playground>(g => g.Playground)
-                   .WithOne(p => p.Game)
-                   .HasForeignKey<Game>(g => g.PlaygroundId);
-
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

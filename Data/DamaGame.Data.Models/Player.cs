@@ -25,6 +25,6 @@
         [ForeignKey("ApplicationUser")]
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<Pawn> Pawns { get; set; } = new List<Pawn>();
+        public virtual Pawn Pawn { get; set; }
     }
 }
