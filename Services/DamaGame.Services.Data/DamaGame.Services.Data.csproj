@@ -23,7 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\DamaGame.Data.Common\DamaGame.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\DamaGame.Data.Models\DamaGame.Data.Models.csproj" />
-    <ProjectReference Include="..\..\Data\DamaGame.Data\DamaGame.Data.csproj" />
     <ProjectReference Include="..\..\Web\DamaGame.Web.Infrastructure\DamaGame.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Web\DamaGame.Web.ViewModels\DamaGame.Web.ViewModels.csproj" />
     <ProjectReference Include="..\DamaGame.Services.Mapping\DamaGame.Services.Mapping.csproj" />

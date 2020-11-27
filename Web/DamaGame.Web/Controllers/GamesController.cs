@@ -41,23 +41,11 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> NewGameAsync(GameStartViewModel gameStartView)
+        public IActionResult NewGameAsync(GameStartViewModel gameStartView)
         {
             var selectedPlayerName = gameStartView.SelectedPlayerName;
 
-            var user = await this.userManager.GetUserAsync(this.User);
-
-            var player = this.playersService
-                                .GetAll<PlayerViewModel>()
-                                .Where(x => x.Name == selectedPlayerName)
-                                .FirstOrDefault();
-
-            var game = this.gamesService
-                            .GetAll<GameViewModel>()
-                            .Where(g => g.RightPlayer == null)
-                            .FirstOrDefault();
-
-            await this.gamesService.CreateGameAsync(game, player, user);
+            this.gamesService.CreateGameAsync(selectedPlayerName);
 
             return this.RedirectToAction("Game");
         }

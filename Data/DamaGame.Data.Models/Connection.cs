@@ -20,5 +20,7 @@
         public int Weight { get; set; }
 
         public FigureConnection Figure { get; set; }
+
+        public virtual Position Position { get; set; }
     }
 }

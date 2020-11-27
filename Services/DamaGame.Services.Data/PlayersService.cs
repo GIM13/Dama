@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using DamaGame.Data;
     using DamaGame.Data.Common.Repositories;
     using DamaGame.Data.Models;
     using DamaGame.Services.Mapping;
@@ -14,14 +13,11 @@
     public class PlayersService : IPlayersService
     {
         private readonly IDeletableEntityRepository<Player> playersRepository;
-        private ApplicationDbContext db;
 
         public PlayersService(
-            IDeletableEntityRepository<Player> playersRepository,
-            ApplicationDbContext db)
+            IDeletableEntityRepository<Player> playersRepository)
         {
             this.playersRepository = playersRepository;
-            this.db = db;
         }
 
         public int GetCount()
@@ -54,12 +50,12 @@
                 Figure = input.Figure,
             };
 
-            var player = new Player
+            var player = new Player { Name = input.Name, User = user };
+
+            for (int i = 0; i < 9; i++)
             {
-                Name = input.Name,
-                User = user,
-                Pawn = pawn,
-            };
+                player.Pawns.Add(pawn);
+            }
 
             await this.playersRepository.AddAsync(player);
             await this.playersRepository.SaveChangesAsync();

@@ -14,6 +14,10 @@
             this.FillingThePositions();
         }
 
+        public string GameId { get; set; }
+
+        public virtual Game Game { get; set; }
+
         public virtual Position[] Positions { get; set; } = new Position[24];
 
         private void FillingThePositions()

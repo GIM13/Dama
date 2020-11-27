@@ -2,9 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using DamaGame.Data.Models;
-    using DamaGame.Web.ViewModels.Games;
-    using DamaGame.Web.ViewModels.Players;
 
     public interface IGamesService
     {
@@ -12,6 +11,6 @@
 
         IEnumerable<T> GetAll<T>();
 
-        Task CreateGameAsync(GameViewModel game, PlayerViewModel player, ApplicationUser user);
+        Task CreateGameAsync(string selectedPlayerName);
     }
 }
