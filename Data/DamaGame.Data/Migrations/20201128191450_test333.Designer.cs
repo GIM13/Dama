@@ -4,14 +4,16 @@ using DamaGame.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DamaGame.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201128191450_test333")]
+    partial class Test333
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,13 +234,10 @@ namespace DamaGame.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LeftPlayerId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RightPlayerId")
+                    b.Property<string>("PlaygroundId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Test")
@@ -248,9 +247,9 @@ namespace DamaGame.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("LeftPlayerId");
-
-                    b.HasIndex("RightPlayerId");
+                    b.HasIndex("PlaygroundId")
+                        .IsUnique()
+                        .HasFilter("[PlaygroundId] IS NOT NULL");
 
                     b.ToTable("Games");
                 });
@@ -269,17 +268,14 @@ namespace DamaGame.Data.Migrations
                     b.Property<int>("Figure")
                         .HasColumnType("int");
 
-                    b.Property<string>("GameId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GameId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PlayerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ReserveColor")
                         .HasColumnType("int");
@@ -289,11 +285,9 @@ namespace DamaGame.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("GameId1");
-
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PlayerId");
 
                     b.ToTable("Pawns");
                 });
@@ -326,9 +320,6 @@ namespace DamaGame.Data.Migrations
                         .HasMaxLength(16)
                         .HasColumnType("nvarchar(16)");
 
-                    b.Property<string>("PawnId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Wins")
                         .HasColumnType("int");
 
@@ -337,8 +328,6 @@ namespace DamaGame.Data.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("PawnId");
 
                     b.ToTable("Players");
                 });
@@ -355,7 +344,7 @@ namespace DamaGame.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("GameId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -364,8 +353,6 @@ namespace DamaGame.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GameId");
 
                     b.HasIndex("IsDeleted");
 
@@ -583,28 +570,20 @@ namespace DamaGame.Data.Migrations
 
             modelBuilder.Entity("DamaGame.Data.Models.Game", b =>
                 {
-                    b.HasOne("DamaGame.Data.Models.Player", "LeftPlayer")
-                        .WithMany()
-                        .HasForeignKey("LeftPlayerId");
+                    b.HasOne("DamaGame.Data.Models.Playground", "Playground")
+                        .WithOne("Game")
+                        .HasForeignKey("DamaGame.Data.Models.Game", "PlaygroundId");
 
-                    b.HasOne("DamaGame.Data.Models.Player", "RightPlayer")
-                        .WithMany()
-                        .HasForeignKey("RightPlayerId");
-
-                    b.Navigation("LeftPlayer");
-
-                    b.Navigation("RightPlayer");
+                    b.Navigation("Playground");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Pawn", b =>
                 {
-                    b.HasOne("DamaGame.Data.Models.Game", null)
-                        .WithMany("PawnsLeftPlayer")
-                        .HasForeignKey("GameId");
+                    b.HasOne("DamaGame.Data.Models.Player", "Player")
+                        .WithMany("Pawns")
+                        .HasForeignKey("PlayerId");
 
-                    b.HasOne("DamaGame.Data.Models.Game", null)
-                        .WithMany("PawnsRightPlayer")
-                        .HasForeignKey("GameId1");
+                    b.Navigation("Player");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Player", b =>
@@ -613,22 +592,7 @@ namespace DamaGame.Data.Migrations
                         .WithMany("Players")
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("DamaGame.Data.Models.Pawn", "Pawn")
-                        .WithMany()
-                        .HasForeignKey("PawnId");
-
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("Pawn");
-                });
-
-            modelBuilder.Entity("DamaGame.Data.Models.Playground", b =>
-                {
-                    b.HasOne("DamaGame.Data.Models.Game", "Game")
-                        .WithMany()
-                        .HasForeignKey("GameId");
-
-                    b.Navigation("Game");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Position", b =>
@@ -700,15 +664,15 @@ namespace DamaGame.Data.Migrations
                     b.Navigation("Roles");
                 });
 
-            modelBuilder.Entity("DamaGame.Data.Models.Game", b =>
+            modelBuilder.Entity("DamaGame.Data.Models.Player", b =>
                 {
-                    b.Navigation("PawnsLeftPlayer");
-
-                    b.Navigation("PawnsRightPlayer");
+                    b.Navigation("Pawns");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Playground", b =>
                 {
+                    b.Navigation("Game");
+
                     b.Navigation("Positions");
                 });
 

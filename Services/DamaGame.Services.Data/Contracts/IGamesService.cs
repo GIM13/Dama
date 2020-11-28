@@ -11,6 +11,6 @@
 
         IEnumerable<T> GetAll<T>();
 
-        Task CreateGameAsync(string selectedPlayerName);
+        void CreateGame(string selectedPlayerName);
     }
 }

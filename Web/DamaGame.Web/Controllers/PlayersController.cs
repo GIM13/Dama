@@ -62,7 +62,7 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
-            if (!this.playersRepository.All().Any(x => x.Name == name && x.User == user))
+            if (!this.playersRepository.All().Any(x => x.Name == name && x.ApplicationUser == user))
             {
                 return this.RedirectToAction("RemovePlayerError", "Errors");
             }
@@ -77,7 +77,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
 
             var players = this.playersService.GetAll<PlayerViewModel>()
-                                             .Where(x => x.User == user);
+                                             .Where(x => x.ApplicationUser == user);
 
             var model = new PlayersListViewModel { PlayersUser = players };
 

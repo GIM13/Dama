@@ -45,7 +45,7 @@
         {
             var selectedPlayerName = gameStartView.SelectedPlayerName;
 
-            this.gamesService.CreateGameAsync(selectedPlayerName);
+            this.gamesService.CreateGame(selectedPlayerName);
 
             return this.RedirectToAction("Game");
         }

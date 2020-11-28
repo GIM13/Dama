@@ -8,7 +8,7 @@
 
 @foreach (var player in this.Model.PlayersUser)
 {
-    <h6>Player-@player.Name  _______  Wins-@player.Wins  _______  Losses-@player.Losses  _______  @player.Pawns.FirstOrDefault().Figure  _______  @player.Pawns.FirstOrDefault().TitularColor  &  @player.Pawns.FirstOrDefault().ReserveColor</h6>
+    <h6>Player-@player.Name  _______  Wins-@player.Wins  _______  Losses-@player.Losses  _______  @player.Pawn.Figure  _______  @player.Pawn.TitularColor  &  @player.Pawn.ReserveColor</h6>
     <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
 }
 

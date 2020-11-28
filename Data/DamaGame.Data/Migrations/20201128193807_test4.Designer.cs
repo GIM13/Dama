@@ -4,14 +4,16 @@ using DamaGame.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DamaGame.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201128193807_test4")]
+    partial class Test4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,17 +271,14 @@ namespace DamaGame.Data.Migrations
                     b.Property<int>("Figure")
                         .HasColumnType("int");
 
-                    b.Property<string>("GameId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GameId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PlayerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ReserveColor")
                         .HasColumnType("int");
@@ -289,11 +288,9 @@ namespace DamaGame.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("GameId1");
-
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PlayerId");
 
                     b.ToTable("Pawns");
                 });
@@ -326,9 +323,6 @@ namespace DamaGame.Data.Migrations
                         .HasMaxLength(16)
                         .HasColumnType("nvarchar(16)");
 
-                    b.Property<string>("PawnId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Wins")
                         .HasColumnType("int");
 
@@ -337,8 +331,6 @@ namespace DamaGame.Data.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("PawnId");
 
                     b.ToTable("Players");
                 });
@@ -598,13 +590,11 @@ namespace DamaGame.Data.Migrations
 
             modelBuilder.Entity("DamaGame.Data.Models.Pawn", b =>
                 {
-                    b.HasOne("DamaGame.Data.Models.Game", null)
-                        .WithMany("PawnsLeftPlayer")
-                        .HasForeignKey("GameId");
+                    b.HasOne("DamaGame.Data.Models.Player", "Player")
+                        .WithMany("Pawns")
+                        .HasForeignKey("PlayerId");
 
-                    b.HasOne("DamaGame.Data.Models.Game", null)
-                        .WithMany("PawnsRightPlayer")
-                        .HasForeignKey("GameId1");
+                    b.Navigation("Player");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Player", b =>
@@ -613,13 +603,7 @@ namespace DamaGame.Data.Migrations
                         .WithMany("Players")
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("DamaGame.Data.Models.Pawn", "Pawn")
-                        .WithMany()
-                        .HasForeignKey("PawnId");
-
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("Pawn");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Playground", b =>
@@ -700,11 +684,9 @@ namespace DamaGame.Data.Migrations
                     b.Navigation("Roles");
                 });
 
-            modelBuilder.Entity("DamaGame.Data.Models.Game", b =>
+            modelBuilder.Entity("DamaGame.Data.Models.Player", b =>
                 {
-                    b.Navigation("PawnsLeftPlayer");
-
-                    b.Navigation("PawnsRightPlayer");
+                    b.Navigation("Pawns");
                 });
 
             modelBuilder.Entity("DamaGame.Data.Models.Playground", b =>

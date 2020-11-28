@@ -14,9 +14,9 @@
 
         public int Losses { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public virtual ICollection<Pawn> Pawns { get; set; }
+        public virtual Pawn Pawn { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

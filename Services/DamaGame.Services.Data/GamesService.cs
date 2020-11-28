@@ -2,24 +2,27 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
+    using DamaGame.Data;
     using DamaGame.Data.Common.Repositories;
     using DamaGame.Data.Models;
+    using DamaGame.Data.Models.Enums;
     using DamaGame.Services.Mapping;
     using DamaGame.Web.ViewModels.Games;
     using DamaGame.Web.ViewModels.Players;
 
     public class GamesService : IGamesService
     {
+        private readonly ApplicationDbContext db;
         private readonly IDeletableEntityRepository<Game> gamesRepository;
-
         private readonly IDeletableEntityRepository<Player> playersRepository;
 
         public GamesService(
+            ApplicationDbContext db,
             IDeletableEntityRepository<Game> gamesRepository,
             IDeletableEntityRepository<Player> playersRepository)
         {
+            this.db = db;
             this.gamesRepository = gamesRepository;
             this.playersRepository = playersRepository;
         }
@@ -34,39 +37,46 @@
             return this.gamesRepository.All().To<T>().ToList();
         }
 
-        public async Task CreateGameAsync(string selectedPlayerName)
+        public void CreateGame(string selectedPlayerName)
         {
-            var testplayer = new Player { Name = "WWWWWWW" };
-
-            await this.playersRepository.AddAsync(testplayer);
-            await this.playersRepository.SaveChangesAsync();
-
-            var player = this.playersRepository
+            var player1 = this.playersRepository
                 .All()
+                .To<PlayerViewModel>()
+                .To<Player>()
                 .Where(p => p.Name == selectedPlayerName)
                 .FirstOrDefault();
 
-            var game = this.gamesRepository
+            var player2 = this.playersRepository
                 .All()
-                .Where(g => g.RightPlayer == null)
+                .Where(p => p.Name == "Genadi")
+                .To<PlayerViewModel>()
+                .To<Player>()
                 .FirstOrDefault();
 
-            if (game != null)
+            // var waiting = this.gamesRepository
+            //    .All()
+            //    .Any(g => g.RightPlayer == null);
+            if (false)
             {
-                game.RightPlayer = player;
+                // var game = this.gamesRepository
+                //    .All()
+                //    .Where(g => g.RightPlayer == null)
+                //    .FirstOrDefault();
 
-                await this.gamesRepository.SaveChangesAsync();
+                // game.RightPlayer = player;
+                // await this.gamesRepository.SaveChangesAsync();
             }
             else
             {
-                game = new Game
+                var game = new Game
                 {
-                    LeftPlayer = player,
-                    RightPlayer = player,
+                    Test = "test555",
+                    LeftPlayer = player1,
+                    RightPlayer = player2,
                 };
 
-                await this.gamesRepository.AddAsync(game);
-                await this.gamesRepository.SaveChangesAsync();
+                this.db.Games.Add(game);
+                this.db.SaveChanges();
             }
         }
     }

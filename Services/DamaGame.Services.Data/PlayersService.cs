@@ -34,7 +34,7 @@
         {
             var result = this.playersRepository
                 .All()
-                .Where(x => x.User == user)
+                .Where(x => x.ApplicationUser == user)
                 .Select(p => new SelectListItem { Text = p.Name })
                 .ToList();
 
@@ -50,12 +50,12 @@
                 Figure = input.Figure,
             };
 
-            var player = new Player { Name = input.Name, User = user };
-
-            for (int i = 0; i < 9; i++)
+            var player = new Player
             {
-                player.Pawns.Add(pawn);
-            }
+                Name = input.Name,
+                ApplicationUser = user,
+                Pawn = pawn,
+            };
 
             await this.playersRepository.AddAsync(player);
             await this.playersRepository.SaveChangesAsync();

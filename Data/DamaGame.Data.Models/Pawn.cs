@@ -17,7 +17,5 @@
         public Color ReserveColor { get; set; } = Color.Sans;
 
         public FigurePawn Figure { get; set; } = FigurePawn.FigureCircle;
-
-        public virtual Player Player { get; set; }
     }
 }

@@ -22,9 +22,8 @@
 
         public int Losses { get; set; }
 
-        [ForeignKey("ApplicationUser")]
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public virtual ICollection<Pawn> Pawns { get; set; } = new List<Pawn>();
+        public virtual Pawn Pawn { get; set; }
     }
 }
