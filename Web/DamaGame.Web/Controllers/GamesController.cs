@@ -58,8 +58,7 @@
         public IActionResult AllGames()
         {
             var games = this.gamesService
-                .GetAll<GameViewModel>()
-                .OrderBy(x => x);
+                .GetAll<GameViewModel>();
 
             var model = new GamesListViewModel { Games = games };
 
