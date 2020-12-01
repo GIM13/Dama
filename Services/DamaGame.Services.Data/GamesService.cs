@@ -39,40 +39,30 @@
 
         public void CreateGame(string selectedPlayerName)
         {
-            var player1 = this.playersRepository
-                .All()
-                .To<PlayerViewModel>()
-                .To<Player>()
+            var player = this.db.Players
                 .Where(p => p.Name == selectedPlayerName)
                 .FirstOrDefault();
 
-            var player2 = this.playersRepository
-                .All()
-                .Where(p => p.Name == "Genadi")
-                .To<PlayerViewModel>()
-                .To<Player>()
-                .FirstOrDefault();
+            var waiting = this.gamesRepository
+               .All()
+               .Any(g => g.RightPlayer == null);
 
-            // var waiting = this.gamesRepository
-            //    .All()
-            //    .Any(g => g.RightPlayer == null);
-            if (false)
+            if (waiting)
             {
-                // var game = this.gamesRepository
-                //    .All()
-                //    .Where(g => g.RightPlayer == null)
-                //    .FirstOrDefault();
+                var game = this.gamesRepository
+                   .All()
+                   .Where(g => g.RightPlayer == null)
+                   .FirstOrDefault();
 
-                // game.RightPlayer = player;
-                // await this.gamesRepository.SaveChangesAsync();
+                game.RightPlayer = player;
+                this.db.SaveChanges();
             }
             else
             {
                 var game = new Game
                 {
-                    Test = "test6",
-                    LeftPlayer = player1,
-                    RightPlayer = player2,
+                    Test = "test66",
+                    LeftPlayer = player,
                 };
 
                 this.db.Games.Add(game);
