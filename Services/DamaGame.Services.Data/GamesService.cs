@@ -70,7 +70,7 @@
             {
                 var game = new Game
                 {
-                    Test = "test555",
+                    Test = "test6",
                     LeftPlayer = player1,
                     RightPlayer = player2,
                 };

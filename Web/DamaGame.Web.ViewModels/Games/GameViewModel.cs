@@ -8,7 +8,7 @@
     {
         public string PlaygroundId { get; set; }
 
-        public virtual Playground Playground { get; set; } = new Playground();
+        public virtual Playground Playground { get; set; }
 
         public string LeftPlayerId { get; set; }
 
