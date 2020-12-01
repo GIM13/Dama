@@ -635,9 +635,11 @@ namespace DamaGame.Data.Migrations
 
             modelBuilder.Entity("DamaGame.Data.Models.Position", b =>
                 {
-                    b.HasOne("DamaGame.Data.Models.Playground", null)
+                    b.HasOne("DamaGame.Data.Models.Playground", "Playground")
                         .WithMany("Positions")
                         .HasForeignKey("PlaygroundId");
+
+                    b.Navigation("Playground");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
