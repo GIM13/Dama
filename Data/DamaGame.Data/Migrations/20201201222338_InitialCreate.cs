@@ -196,31 +196,6 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "Players",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
-                    Wins = table.Column<int>(type: "int", nullable: false),
-                    Losses = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUser = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Players", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Players_AspNetUsers_ApplicationUser",
-                        column: x => x.ApplicationUser,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Positions",
                 columns: table => new
                 {
@@ -242,67 +217,6 @@
                         name: "FK_Positions_Playgrounds_PlaygroundId",
                         column: x => x.PlaygroundId,
                         principalTable: "Playgrounds",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Games",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PlaygroundId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    LeftPlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    RightPlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Games", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Games_Players_LeftPlayerId",
-                        column: x => x.LeftPlayerId,
-                        principalTable: "Players",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Games_Players_RightPlayerId",
-                        column: x => x.RightPlayerId,
-                        principalTable: "Players",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Games_Playgrounds_PlaygroundId",
-                        column: x => x.PlaygroundId,
-                        principalTable: "Playgrounds",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Pawns",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TitularColor = table.Column<int>(type: "int", nullable: false),
-                    ReserveColor = table.Column<int>(type: "int", nullable: false),
-                    Figure = table.Column<int>(type: "int", nullable: false),
-                    PlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pawns", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Pawns_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -364,6 +278,100 @@
                         name: "FK_Damas_Positions_ThirdPositionId",
                         column: x => x.ThirdPositionId,
                         principalTable: "Positions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Players",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    Wins = table.Column<int>(type: "int", nullable: false),
+                    Losses = table.Column<int>(type: "int", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PawnId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Players", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Players_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Games",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PlaygroundId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    LeftPlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    RightPlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Games", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Games_Players_LeftPlayerId",
+                        column: x => x.LeftPlayerId,
+                        principalTable: "Players",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Games_Players_RightPlayerId",
+                        column: x => x.RightPlayerId,
+                        principalTable: "Players",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Games_Playgrounds_PlaygroundId",
+                        column: x => x.PlaygroundId,
+                        principalTable: "Playgrounds",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pawns",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TitularColor = table.Column<int>(type: "int", nullable: false),
+                    ReserveColor = table.Column<int>(type: "int", nullable: false),
+                    Figure = table.Column<int>(type: "int", nullable: false),
+                    GameId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    GameId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pawns", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pawns_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Pawns_Games_GameId1",
+                        column: x => x.GameId1,
+                        principalTable: "Games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -470,24 +478,36 @@
                 column: "RightPlayerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pawns_GameId",
+                table: "Pawns",
+                column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pawns_GameId1",
+                table: "Pawns",
+                column: "GameId1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pawns_IsDeleted",
                 table: "Pawns",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pawns_PlayerId",
-                table: "Pawns",
-                column: "PlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Players_ApplicationUser",
+                name: "IX_Players_ApplicationUserId",
                 table: "Players",
-                column: "ApplicationUser");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Players_IsDeleted",
                 table: "Players",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Players_PawnId",
+                table: "Players",
+                column: "PawnId",
+                unique: true,
+                filter: "[PawnId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Playgrounds_IsDeleted",
@@ -508,10 +528,30 @@
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Players_Pawns_PawnId",
+                table: "Players",
+                column: "PawnId",
+                principalTable: "Pawns",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Players_AspNetUsers_ApplicationUserId",
+                table: "Players");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Games_Players_LeftPlayerId",
+                table: "Games");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Games_Players_RightPlayerId",
+                table: "Games");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -534,12 +574,6 @@
                 name: "Damas");
 
             migrationBuilder.DropTable(
-                name: "Games");
-
-            migrationBuilder.DropTable(
-                name: "Pawns");
-
-            migrationBuilder.DropTable(
                 name: "Settings");
 
             migrationBuilder.DropTable(
@@ -549,13 +583,19 @@
                 name: "Positions");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Players");
 
             migrationBuilder.DropTable(
-                name: "Playgrounds");
+                name: "Pawns");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Games");
+
+            migrationBuilder.DropTable(
+                name: "Playgrounds");
         }
     }
 }

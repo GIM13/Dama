@@ -24,6 +24,8 @@
 
         public virtual ApplicationUser ApplicationUser { get; set; }
 
+        public string PawnId { get; set; }
+
         public virtual Pawn Pawn { get; set; }
     }
 }

@@ -12,8 +12,6 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public string Test { get; set; }
-
         public string PlaygroundId { get; set; }
 
         public virtual Playground Playground { get; set; } = new Playground();

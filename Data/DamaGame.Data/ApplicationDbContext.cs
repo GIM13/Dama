@@ -62,9 +62,14 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Game>()
-                  .HasOne<Playground>(g => g.Playground)
-                  .WithOne(p => p.Game)
-                  .HasForeignKey<Game>(g => g.PlaygroundId);
+                   .HasOne<Playground>(g => g.Playground)
+                   .WithOne(p => p.Game)
+                   .HasForeignKey<Game>(g => g.PlaygroundId);
+
+            builder.Entity<Player>()
+                   .HasOne<Pawn>(pl => pl.Pawn)
+                   .WithOne(pa => pa.Player)
+                   .HasForeignKey<Player>(pl => pl.PawnId);
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);

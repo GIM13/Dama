@@ -43,6 +43,16 @@
                 .Where(p => p.Name == selectedPlayerName)
                 .FirstOrDefault();
 
+            var pawn = this.db.Pawns
+                .Where(p => p.Player.Name == selectedPlayerName)
+                .FirstOrDefault();
+
+            var pawns = new List<Pawn>();
+            for (int i = 0; i < 9; i++)
+            {
+                pawns.Add(pawn);
+            }
+
             var waiting = this.gamesRepository
                .All()
                .Any(g => g.RightPlayer == null);
@@ -55,14 +65,15 @@
                    .FirstOrDefault();
 
                 game.RightPlayer = player;
+                game.PawnsRightPlayer = pawns;
                 this.db.SaveChanges();
             }
             else
             {
                 var game = new Game
                 {
-                    Test = "test66",
                     LeftPlayer = player,
+                    PawnsRightPlayer = pawns,
                 };
 
                 this.db.Games.Add(game);
