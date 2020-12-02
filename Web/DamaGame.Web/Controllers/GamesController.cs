@@ -41,18 +41,18 @@
         }
 
         [HttpPost]
-        public IActionResult NewGameAsync(GameStartViewModel gameStartView)
+        public IActionResult NewGame(GameStartViewModel gameStartView)
         {
             var selectedPlayerName = gameStartView.SelectedPlayerName;
 
-            this.gamesService.CreateGame(selectedPlayerName);
+            var gameId = this.gamesService.CreateGame(selectedPlayerName);
 
-            return this.RedirectToAction("Game");
-        }
+            var model = this.gamesService
+                .GetAll<GameViewModel>()
+                .Where(g => g.Id == gameId)
+                .FirstOrDefault();
 
-        public IActionResult Game()
-        {
-            return this.View();
+            return this.View("Game", model);
         }
 
         public IActionResult AllGames()

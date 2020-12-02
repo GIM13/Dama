@@ -37,7 +37,7 @@
             return this.gamesRepository.All().To<T>().ToList();
         }
 
-        public void CreateGame(string selectedPlayerName)
+        public string CreateGame(string selectedPlayerName)
         {
             var player = this.db.Players
                 .Where(p => p.Name == selectedPlayerName)
@@ -54,31 +54,33 @@
             }
 
             var waiting = this.gamesRepository
-               .All()
-               .Any(g => g.RightPlayer == null);
+                .All()
+                .Any(g => g.RightPlayer == null);
+
+            var game = new Game();
 
             if (waiting)
             {
-                var game = this.gamesRepository
-                   .All()
-                   .Where(g => g.RightPlayer == null)
-                   .FirstOrDefault();
+                game = this.gamesRepository
+                    .All()
+                    .Where(g => g.RightPlayer == null)
+                    .FirstOrDefault();
 
                 game.RightPlayer = player;
                 game.PawnsRightPlayer = pawns;
+
                 this.db.SaveChanges();
             }
             else
             {
-                var game = new Game
-                {
-                    LeftPlayer = player,
-                    PawnsRightPlayer = pawns,
-                };
+                game.LeftPlayer = player;
+                game.PawnsLeftPlayer = pawns;
 
                 this.db.Games.Add(game);
                 this.db.SaveChanges();
             }
+
+            return game.Id;
         }
     }
 }

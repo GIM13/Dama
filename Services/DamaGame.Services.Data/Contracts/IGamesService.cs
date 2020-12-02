@@ -11,6 +11,6 @@
 
         IEnumerable<T> GetAll<T>();
 
-        void CreateGame(string selectedPlayerName);
+        string CreateGame(string selectedPlayerName);
     }
 }
