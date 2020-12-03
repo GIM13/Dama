@@ -52,6 +52,11 @@
                 .Where(g => g.Id == gameId)
                 .FirstOrDefault();
 
+            if (model.RightPlayer != null)
+            {
+                this.gamesService.FillingThePawns(model);
+            }
+
             return this.View("Game", model);
         }
 

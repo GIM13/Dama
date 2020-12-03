@@ -50,7 +50,7 @@
             var pawns = new List<Pawn>();
             for (int i = 0; i < 9; i++)
             {
-                pawns.Add(pawn);
+                pawns.Add(player.Pawn);
             }
 
             var waiting = this.gamesRepository
@@ -67,20 +67,28 @@
                     .FirstOrDefault();
 
                 game.RightPlayer = player;
-                game.PawnsRightPlayer = pawns;
 
                 this.db.SaveChanges();
             }
             else
             {
                 game.LeftPlayer = player;
-                game.PawnsLeftPlayer = pawns;
 
                 this.db.Games.Add(game);
                 this.db.SaveChanges();
             }
 
             return game.Id;
+        }
+
+        public void FillingThePawns(GameViewModel model)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                model.PawnsLeftPlayer.Add(model.LeftPlayer.Pawn);
+
+                model.PawnsRightPlayer.Add(model.RightPlayer.Pawn);
+            }
         }
     }
 }

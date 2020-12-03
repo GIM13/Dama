@@ -19,9 +19,5 @@
         public virtual Player LeftPlayer { get; set; }
 
         public virtual Player RightPlayer { get; set; }
-
-        public virtual ICollection<Pawn> PawnsLeftPlayer { get; set; }
-
-        public virtual ICollection<Pawn> PawnsRightPlayer { get; set; }
     }
 }
