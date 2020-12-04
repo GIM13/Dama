@@ -41,11 +41,12 @@
         }
 
         [HttpPost]
-        public IActionResult NewGame(GameStartViewModel gameStartView)
+        public async Task<IActionResult> NewGameAsync(GameStartViewModel gameStartView)
         {
             var selectedPlayerName = gameStartView.SelectedPlayerName;
+            var user = await this.userManager.GetUserAsync(this.User);
 
-            var gameId = this.gamesService.CreateGame(selectedPlayerName);
+            var gameId = this.gamesService.CreateGame(selectedPlayerName, user);
 
             var model = this.gamesService
                 .GetAll<GameViewModel>()

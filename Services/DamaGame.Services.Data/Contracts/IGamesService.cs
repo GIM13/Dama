@@ -12,7 +12,7 @@
 
         IEnumerable<T> GetAll<T>();
 
-        string CreateGame(string selectedPlayerName);
+        string CreateGame(string selectedPlayerName, ApplicationUser user);
 
         void FillingThePawns(GameViewModel model);
     }

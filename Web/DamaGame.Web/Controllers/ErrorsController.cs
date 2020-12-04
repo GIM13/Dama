@@ -15,5 +15,10 @@
         {
             return this.View();
         }
+
+        public IActionResult ReserveColorError()
+        {
+            return this.View();
+        }
     }
 }

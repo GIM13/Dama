@@ -37,7 +37,7 @@
             return this.gamesRepository.All().To<T>().ToList();
         }
 
-        public string CreateGame(string selectedPlayerName)
+        public string CreateGame(string selectedPlayerName, ApplicationUser user)
         {
             var player = this.db.Players
                 .Where(p => p.Name == selectedPlayerName)
@@ -47,23 +47,24 @@
                 .Where(p => p.Player.Name == selectedPlayerName)
                 .FirstOrDefault();
 
-            var pawns = new List<Pawn>();
-            for (int i = 0; i < 9; i++)
-            {
-                pawns.Add(player.Pawn);
-            }
-
             var waiting = this.gamesRepository
                 .All()
                 .Any(g => g.RightPlayer == null);
 
-            var game = new Game();
+            var gameId = string.Empty;
 
             if (waiting)
             {
-                game = this.gamesRepository
+                var game = this.gamesRepository
                     .All()
                     .Where(g => g.RightPlayer == null)
+                    .FirstOrDefault();
+
+                gameId = game.Id;
+
+                var leftPlayer = this.playersRepository
+                    .All()
+                    .Where(x => x.Id == gameId)
                     .FirstOrDefault();
 
                 game.RightPlayer = player;
@@ -72,13 +73,18 @@
             }
             else
             {
-                game.LeftPlayer = player;
+                var game = new Game
+                {
+                    LeftPlayer = player,
+                };
+
+                gameId = game.Id;
 
                 this.db.Games.Add(game);
                 this.db.SaveChanges();
             }
 
-            return game.Id;
+            return gameId;
         }
 
         public void FillingThePawns(GameViewModel model)

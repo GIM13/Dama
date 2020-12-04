@@ -44,6 +44,10 @@
             {
                 return this.RedirectToAction("AddPlayerError", "Errors");
             }
+            else if (input.TitularColor == input.ReserveColor)
+            {
+                return this.RedirectToAction("ReserveColorError", "Errors");
+            }
 
             var user = await this.userManager.GetUserAsync(this.User);
 
