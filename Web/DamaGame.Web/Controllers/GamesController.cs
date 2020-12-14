@@ -7,9 +7,11 @@
     using DamaGame.Services.Data;
     using DamaGame.Web.ViewModels.Games;
     using DamaGame.Web.ViewModels.Players;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class GamesController : Controller
     {
         private readonly IPlayersService playersService;
@@ -46,17 +48,21 @@
             var selectedPlayerName = gameStartView.SelectedPlayerName;
             var user = await this.userManager.GetUserAsync(this.User);
 
-            var gameId = this.gamesService.CreateGame(selectedPlayerName, user);
+            var gameId = this.gamesService
+                .CreateGame(selectedPlayerName, user)
+                .ToString();
+
+            if (gameId == string.Empty)
+            {
+                return this.View("PlayerWaiting");
+            }
 
             var model = this.gamesService
                 .GetAll<GameViewModel>()
                 .Where(g => g.Id == gameId)
                 .FirstOrDefault();
 
-            if (model.RightPlayer != null)
-            {
-                this.gamesService.FillingThePawns(model);
-            }
+            this.gamesService.FillingThePawns(model);
 
             return this.View("Game", model);
         }
@@ -64,11 +70,30 @@
         public IActionResult AllGames()
         {
             var games = this.gamesService
-                .GetAll<GameViewModel>();
+                .GetAll<GameViewModel>()
+                .OrderBy(x => x.CreatedOn);
 
-            var model = new GamesListViewModel { Games = games };
+            var waitinPlayer = this.playersService
+                .GetAll<PlayerViewModel>()
+                .Where(x => x.Waiting == true)
+                .FirstOrDefault();
+
+            var model = new GamesListViewModel
+            {
+                Games = games,
+                WaitinPlayer = waitinPlayer,
+            };
 
             return this.View(model);
         }
+
+        // public IActionResult Game()
+        // {
+        //     var game = this.gamesService
+        //         .GetAll<GameViewModel>()
+        //         .Where(x => x.Id == "ot kade")
+        //         .FirstOrDefault();
+        //     return this.View(game);
+        // }
     }
 }

@@ -8,9 +8,10 @@
 
 <h1 class="card-title text-center text-primary">@this.ViewData["Title"]   triabva da se pravi</h1>
 
-@this.Model.LeftPlayer.Name
+<h1 class="card-title text-center text-primary"> @this.Model.LeftPlayer.Name    &    @this.Model.RightPlayer.Name</h1>
+
 
 @foreach (var position in this.Model.Playground.Positions)
 {
-    <p> @position.Figure ... @position.Color .... @position.StatePosition</p>
+    <p class="card-title text-center text-white"> @position.Figure ... @position.Color .... @position.StatePosition</p>
 }

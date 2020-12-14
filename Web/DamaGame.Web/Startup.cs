@@ -11,6 +11,7 @@
     using DamaGame.Services.Data;
     using DamaGame.Services.Mapping;
     using DamaGame.Services.Messaging;
+    using DamaGame.Web.Hubs;
     using DamaGame.Web.ViewModels;
 
     using Microsoft.AspNetCore.Builder;
@@ -55,6 +56,7 @@
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);
+            services.AddSignalR();
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -109,6 +111,8 @@
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
+                        endpoints.MapHub<AllGamesHub>("/allgames");
+                        endpoints.MapHub<GameHub>("/game");
                     });
         }
     }

@@ -18,6 +18,8 @@
 
         public virtual Pawn Pawn { get; set; }
 
+        public bool Waiting { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Player, PlayerViewModel>();

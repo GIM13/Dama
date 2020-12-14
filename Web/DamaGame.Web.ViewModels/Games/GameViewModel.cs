@@ -1,5 +1,6 @@
 ﻿namespace DamaGame.Web.ViewModels.Games
 {
+    using System;
     using System.Collections.Generic;
 
     using AutoMapper;
@@ -10,19 +11,17 @@
     {
         public string Id { get; set; }
 
-        public virtual Playground Playground { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-        public string LeftPlayerId { get; set; }
+        public virtual Playground Playground { get; set; }
 
         public virtual Player LeftPlayer { get; set; }
 
-        public string RightPlayerId { get; set; }
-
         public virtual Player RightPlayer { get; set; }
 
-        public virtual ICollection<Pawn> PawnsLeftPlayer { get; set; } = new List<Pawn>();
+        public virtual ICollection<Pawn> LeftPlayerPawns { get; set; } = new List<Pawn>();
 
-        public virtual ICollection<Pawn> PawnsRightPlayer { get; set; } = new List<Pawn>();
+        public virtual ICollection<Pawn> RightPlayerPawns { get; set; } = new List<Pawn>();
 
         public void CreateMappings(IProfileExpression configuration)
         {

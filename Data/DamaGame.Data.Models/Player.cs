@@ -1,9 +1,7 @@
 ﻿namespace DamaGame.Data.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     using DamaGame.Data.Common.Models;
 
@@ -21,6 +19,8 @@
         public int Wins { get; set; }
 
         public int Losses { get; set; }
+
+        public bool Waiting { get; set; } = false;
 
         public virtual ApplicationUser ApplicationUser { get; set; }
 

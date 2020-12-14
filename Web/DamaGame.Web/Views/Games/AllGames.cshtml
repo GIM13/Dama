@@ -9,16 +9,18 @@
 
 @if (this.Model.Games.Count() == 0)
 {
-<h5 class="card-title text-center text-primary">There are currently no active games</h5>
+    <h5 class="card-title text-center text-primary">There are currently no active games</h5>
+}
+
+@if (this.Model.WaitinPlayer != null)
+{
+
+    <h6 class="text-md-center">Player-@this.Model.WaitinPlayer.Name  = VS =  Waiting for a new player</h6>
+    <br />
 }
 
 @foreach (var game in this.Model.Games)
 {
-    var name = "Waiting for a new player";
-
-    if (@game.RightPlayer != null)
-    {
-        name = "Player-" + @game.RightPlayer.Name;
-    }
-    <h6>Player-@game.LeftPlayer.Name  = VS =  @name</h6>
+<a class="text-white" asp-area="" asp-controller="Games" asp-action="Game">Player-@game.LeftPlayer.Name  = VS =  Player-@game.RightPlayer.Name</a>
+<br />
 }

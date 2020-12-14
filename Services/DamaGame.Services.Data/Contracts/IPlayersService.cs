@@ -18,5 +18,7 @@
         Task RemovePlayer(string name);
 
         IEnumerable<SelectListItem> GetAllPlayersTheUser(ApplicationUser user);
+
+        Player CreatePlayer(string name, ApplicationUser user, Pawn pawn);
     }
 }
