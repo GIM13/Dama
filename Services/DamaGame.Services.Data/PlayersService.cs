@@ -18,9 +18,11 @@
         private readonly IPawnsService pawnsService;
 
         public PlayersService(
-            IDeletableEntityRepository<Player> playersRepository)
+            IDeletableEntityRepository<Player> playersRepository,
+            IPawnsService pawnsService)
         {
             this.playersRepository = playersRepository;
+            this.pawnsService = pawnsService;
         }
 
         public int GetCount()

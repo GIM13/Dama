@@ -73,7 +73,7 @@
             {
                 newPlayer.Waiting = true;
 
-                this.playersRepository.SaveChangesAsync();
+                this.db.SaveChanges();
             }
             else
             {
