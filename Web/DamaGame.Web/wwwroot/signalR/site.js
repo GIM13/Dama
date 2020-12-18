@@ -6,7 +6,7 @@ setupConnection = () => {
         .build();
 
     connection.on("AllGames", function (newModel) {
-        document.model = this.newModel;
+        document.getElementById("allGames").model = this.newModel;
     });
 
     connection.start()

@@ -12,15 +12,9 @@
     [Authorize]
     public class AllGamesHub : Hub
     {
-        private readonly IGamesService gamesService;
-        private readonly IPlayersService playersService;
-
-        public AllGamesHub(
-            IGamesService gamesService,
-            IPlayersService playersService)
+        public GamesListViewModel AllGamesRefresh(GamesListViewModel model)
         {
-            this.gamesService = gamesService;
-            this.playersService = playersService;
+             return model;
         }
     }
 }

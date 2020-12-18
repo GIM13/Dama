@@ -11,16 +11,16 @@
 {
     <h5 class="card-title text-center text-primary">There are currently no active games</h5>
 }
+<div id="allGames">
+    @if (this.Model.WaitinPlayer != null)
+    {
+        <h6 class="text-md-center">Player-@this.Model.WaitinPlayer.Name  = VS =  Waiting for a new player</h6>
+        <br />
+    }
 
-@if (this.Model.WaitinPlayer != null)
-{
-
-    <h6 class="text-md-center">Player-@this.Model.WaitinPlayer.Name  = VS =  Waiting for a new player</h6>
-    <br />
-}
-
-@foreach (var game in this.Model.Games)
-{
-<a class="text-white" asp-area="" asp-controller="Games" asp-action="Game">Player-@game.LeftPlayer.Name  = VS =  Player-@game.RightPlayer.Name</a>
-<br />
-}
+    @foreach (var game in this.Model.Games)
+    {
+        <a class="text-white" asp-area="" asp-controller="Games" asp-action="Game">Player-@game.LeftPlayer.Name  = VS =  Player-@game.RightPlayer.Name</a>
+        <br />
+    }
+</div>

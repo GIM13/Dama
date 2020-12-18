@@ -15,5 +15,7 @@
         string CreateGame(string selectedPlayerName, ApplicationUser user);
 
         void FillingThePawns(GameViewModel model);
+
+        GamesListViewModel GetUpdateForGames();
     }
 }

@@ -67,27 +67,16 @@
 
             this.gamesService.FillingThePawns(model);
 
+            var newModel = this.gamesService.GetUpdateForGames();
+
+            await this.allGamesHub.Clients.All.SendAsync("AllGames", newModel);
+
             return this.View("Game", model);
         }
 
-        public async Task<IActionResult> AllGamesAsync()
+        public IActionResult AllGamesAsync()
         {
-            var games = this.gamesService
-                .GetAll<GameViewModel>()
-                .OrderBy(x => x.CreatedOn);
-
-            var waitinPlayer = this.playersService
-                .GetAll<PlayerViewModel>()
-                .Where(x => x.Waiting == true)
-                .FirstOrDefault();
-
-            var model = new GamesListViewModel
-            {
-                Games = games,
-                WaitinPlayer = waitinPlayer,
-            };
-
-            await this.allGamesHub.Clients.All.SendAsync("AllGames", model);
+            var model = this.gamesService.GetUpdateForGames();
 
             return this.View(model);
         }

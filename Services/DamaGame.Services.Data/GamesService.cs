@@ -113,5 +113,27 @@
                 model.RightPlayerPawns.Add(rightPlayerPawn);
             }
         }
+
+        public GamesListViewModel GetUpdateForGames()
+        {
+            var games = this.gamesRepository
+                .All()
+                .To<GameViewModel>()
+                .OrderBy(x => x.CreatedOn);
+
+            var waitinPlayer = this.playersRepository
+                .All()
+                .To<PlayerViewModel>()
+                .Where(x => x.Waiting == true)
+                .FirstOrDefault();
+
+            var model = new GamesListViewModel
+            {
+                Games = games,
+                WaitinPlayer = waitinPlayer,
+            };
+
+            return model;
+        }
     }
 }
