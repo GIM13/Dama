@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using DamaGame.Data.Common.Models;
+    using DamaGame.Data.Models.Enums;
 
     public class Player : BaseDeletableModel<string>
     {
@@ -20,7 +21,7 @@
 
         public int Losses { get; set; }
 
-        public bool Waiting { get; set; } = false;
+        public StatePlayer StatePlayer { get; set; } = StatePlayer.Inaction;
 
         public virtual ApplicationUser ApplicationUser { get; set; }
 

@@ -7,7 +7,6 @@
     using DamaGame.Services.Data;
     using DamaGame.Web.Hubs;
     using DamaGame.Web.ViewModels.Games;
-    using DamaGame.Web.ViewModels.Players;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -47,6 +46,7 @@
 
         [HttpPost]
         public async Task<IActionResult> NewGameAsync(GameStartViewModel gameStartView)
+            /*[FromBody]string selectedPlayerName*/
         {
             var selectedPlayerName = gameStartView.SelectedPlayerName;
             var user = await this.userManager.GetUserAsync(this.User);
@@ -67,10 +67,6 @@
 
             this.gamesService.FillingThePawns(model);
 
-            var newModel = this.gamesService.GetUpdateForGames();
-
-            await this.allGamesHub.Clients.All.SendAsync("AllGames", newModel);
-
             return this.View("Game", model);
         }
 
@@ -81,13 +77,13 @@
             return this.View(model);
         }
 
-        // public IActionResult Game()
-        // {
-        //     var game = this.gamesService
-        //         .GetAll<GameViewModel>()
-        //         .Where(x => x.Id == "ot kade")
-        //         .FirstOrDefault();
-        //     return this.View(game);
-        // }
+        public async Task<IActionResult> GameAsync()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var game = this.gamesService.GetNewGame(user);
+
+            return this.View(game);
+        }
     }
 }

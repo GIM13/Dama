@@ -7,11 +7,81 @@
 }
 
 <h1 class="card-title text-center text-primary">@this.ViewData["Title"]   triabva da se pravi</h1>
+<div id="game">
+    <h1 class="card-title text-center text-primary"> @this.Model.LeftPlayer.Name    &    @this.Model.RightPlayer.Name</h1>
 
-<h1 class="card-title text-center text-primary"> @this.Model.LeftPlayer.Name    &    @this.Model.RightPlayer.Name</h1>
+    @*_______________VISUALIZATION______________
+              A1-------------A4-------------A8
+              |              |              |
+              |    B2--------B4--------B7   |
+              |    |         |         |    |
+              |    |    C3---C4---C6   |    |
+              |    |    |         |    |    |
+              D1---D2---D3        E6---E7---E8
+              |    |    |         |    |    |
+              |    |    F3---F5---F6   |    |
+              |    |         |         |    |
+              |    G2--------G5--------G7   |
+              |              |              |
+              H1-------------H5-------------H8
+        __________________________________________*@
+    @if (true)
+    {
+        var positions = this.Model.Playground.Positions.ToList();
 
+        <div class="row-cols-1">
+            <a id="A1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "A1").Name</a>
 
-@foreach (var position in this.Model.Playground.Positions)
-{
-    <p class="card-title text-center text-white"> @position.Figure ... @position.Color .... @position.StatePosition</p>
-}
+            <a id="A4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "A4").Name</a>
+
+            <a id="A8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "A8").Name</a>
+        </div>
+        <div class="row-cols-1">
+            <a id="B2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "B2").Name</a>
+
+            <a id="B4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "B4").Name</a>
+
+            <a id="B7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "B7").Name</a>
+        </div>
+        <div class="row-cols-1">
+            <a id="C3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "C3").Name</a>
+
+            <a id="C4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "C4").Name</a>
+
+            <a id="C6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "C6").Name</a>
+        </div>
+        <div class="row-cols-1">
+            <a id="D1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "D1").Name</a>
+
+            <a id="D2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "D2").Name</a>
+
+            <a id="D3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "D3").Name</a>
+            <a id="E6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "E6").Name</a>
+
+            <a id="E7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "E7").Name</a>
+
+            <a id="E8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "E8").Name</a>
+        </div>
+        <div class="row-cols-1">
+            <a id="F3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "F3").Name</a>
+
+            <a id="F5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "F5").Name</a>
+
+            <a id="F6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "F6").Name</a>
+        </div>
+        <div class="row-cols-1">
+            <a id="G2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "G2").Name</a>
+
+            <a id="G5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "G5").Name</a>
+
+            <a id="G7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "G7").Name</a>
+        </div>
+        <div class="row-cols-1">
+            <a id="H1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "H1").Name</a>
+
+            <a id="H5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "H5").Name</a>
+
+            <a id="H8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "H8").Name</a>
+        </div>
+    }
+</div>

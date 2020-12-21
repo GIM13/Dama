@@ -2,11 +2,11 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using DamaGame.Data;
     using DamaGame.Data.Common.Repositories;
     using DamaGame.Data.Models;
+    using DamaGame.Data.Models.Enums;
     using DamaGame.Services.Mapping;
     using DamaGame.Web.ViewModels.Games;
     using DamaGame.Web.ViewModels.Players;
@@ -46,7 +46,7 @@
         {
             var waitingPlayer = this.playersRepository
                 .All()
-                .Where(p => p.Waiting == true)
+                .Where(p => p.StatePlayer == StatePlayer.Waiting)
                 .Select(x => x)
                 .FirstOrDefault();
 
@@ -71,7 +71,7 @@
 
             if (waitingPlayer == null)
             {
-                newPlayer.Waiting = true;
+                newPlayer.StatePlayer = StatePlayer.Waiting;
 
                 this.db.SaveChanges();
             }
@@ -83,7 +83,8 @@
                     RightPlayer = newPlayer,
                 };
 
-                waitingPlayer.Waiting = false;
+                waitingPlayer.StatePlayer = StatePlayer.InPlay;
+                newPlayer.StatePlayer = StatePlayer.InPlay;
 
                 gameId = game.Id;
 
@@ -124,7 +125,7 @@
             var waitinPlayer = this.playersRepository
                 .All()
                 .To<PlayerViewModel>()
-                .Where(x => x.Waiting == true)
+                .Where(x => x.StatePlayer == StatePlayer.Waiting)
                 .FirstOrDefault();
 
             var model = new GamesListViewModel
@@ -134,6 +135,23 @@
             };
 
             return model;
+        }
+
+        public GameViewModel GetNewGame(ApplicationUser user)
+        {
+            var player = this.playersRepository
+                .All()
+                .To<PlayerViewModel>()
+                .Where(x => x.ApplicationUser == user && x.StatePlayer == StatePlayer.InPlay)
+                .FirstOrDefault();
+
+            var game = this.gamesRepository
+                .All()
+                .To<GameViewModel>()
+                .Where(x => x.LeftPlayer.Name == player.Name || x.RightPlayer.Name == player.Name)
+                .FirstOrDefault();
+
+            return game;
         }
     }
 }

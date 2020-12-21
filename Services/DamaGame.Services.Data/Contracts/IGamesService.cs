@@ -17,5 +17,7 @@
         void FillingThePawns(GameViewModel model);
 
         GamesListViewModel GetUpdateForGames();
+
+        GameViewModel GetNewGame(ApplicationUser user);
     }
 }

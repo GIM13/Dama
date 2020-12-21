@@ -1,20 +1,42 @@
 ﻿namespace DamaGame.Web.Hubs
 {
-    using System.Linq;
     using System.Threading.Tasks;
 
+    using DamaGame.Data.Models;
     using DamaGame.Services.Data;
-    using DamaGame.Web.ViewModels.Games;
-    using DamaGame.Web.ViewModels.Players;
+
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
 
     [Authorize]
     public class AllGamesHub : Hub
     {
-        public GamesListViewModel AllGamesRefresh(GamesListViewModel model)
+        private readonly IGamesService gamesService;
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public AllGamesHub(
+            UserManager<ApplicationUser> userManager,
+            IGamesService gamesService)
         {
-             return model;
+            this.gamesService = gamesService;
+            this.userManager = userManager;
+        }
+
+        public async Task AllGamesRefreshAsync()
+        {
+            var newModel = this.gamesService.GetUpdateForGames();
+
+            await this.Clients.All.SendAsync("AllGames", newModel);
+        }
+
+        public async Task NewGameAsync()
+        {
+            var user = await this.userManager.GetUserAsync(this.Context.User);
+
+            var game = this.gamesService.GetNewGame(user);
+
+            await this.Clients.All.SendAsync("Game", game);
         }
     }
 }
