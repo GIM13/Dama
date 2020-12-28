@@ -10,6 +10,8 @@
 <div id="game">
     <h1 class="card-title text-center text-primary"> @this.Model.LeftPlayer.Name    &    @this.Model.RightPlayer.Name</h1>
 
+    <img src="~/img/board.png" class="img-fluid" alt="Responsive image">
+
     @*_______________VISUALIZATION______________
               A1-------------A4-------------A8
               |              |              |
@@ -30,58 +32,59 @@
         var positions = this.Model.Playground.Positions.ToList();
 
         <div class="row-cols-1">
-            <a id="A1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "A1").Name</a>
+            <a id="A1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="A4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "A4").Name</a>
+            <a id="A4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="A8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "A8").Name</a>
+            <a id="A8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
         </div>
         <div class="row-cols-1">
-            <a id="B2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "B2").Name</a>
+            <a id="B2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="B4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "B4").Name</a>
+            <a id="B4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="B7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "B7").Name</a>
+            <a id="B7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
         </div>
         <div class="row-cols-1">
-            <a id="C3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "C3").Name</a>
+            <a id="C3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="C4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "C4").Name</a>
+            <a id="C4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="C6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "C6").Name</a>
+            <a id="C6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
         </div>
         <div class="row-cols-1">
-            <a id="D1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "D1").Name</a>
+            <a id="D1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="D2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "D2").Name</a>
+            <a id="D2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="D3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "D3").Name</a>
-            <a id="E6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "E6").Name</a>
+            <a id="D3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+            <a id="E6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="E7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "E7").Name</a>
+            <a id="E7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="E8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "E8").Name</a>
+            <a id="E8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
         </div>
         <div class="row-cols-1">
-            <a id="F3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "F3").Name</a>
+            <a id="F3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="F5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "F5").Name</a>
+            <a id="F5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="F6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "F6").Name</a>
+            <a id="F6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
         </div>
         <div class="row-cols-1">
-            <a id="G2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "G2").Name</a>
+            <a id="G2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="G5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "G5").Name</a>
+            <a id="G5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="G7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "G7").Name</a>
+            <a id="G7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
         </div>
         <div class="row-cols-1">
-            <a id="H1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "H1").Name</a>
+            <a id="H1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="H5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "H5").Name</a>
+            <a id="H5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="H8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer">@positions.Find(x => x.Name == "H8").Name</a>
+            <a id="H8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
         </div>
     }
+    <script type="module" src="~/js/board.js"></script>
 </div>

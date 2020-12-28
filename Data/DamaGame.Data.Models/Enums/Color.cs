@@ -10,6 +10,5 @@
         Green = 5,
         Red = 6,
         Brown = 7,
-        Sans = 8,
     }
 }

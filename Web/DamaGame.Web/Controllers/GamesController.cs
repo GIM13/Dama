@@ -46,7 +46,7 @@
 
         [HttpPost]
         public async Task<IActionResult> NewGameAsync(GameStartViewModel gameStartView)
-            /*[FromBody]string selectedPlayerName*/
+        /*[FromBody]string selectedPlayerName*/
         {
             var selectedPlayerName = gameStartView.SelectedPlayerName;
             var user = await this.userManager.GetUserAsync(this.User);
@@ -60,14 +60,20 @@
                 return this.View("PlayerWaiting");
             }
 
-            var model = this.gamesService
+            var game = this.gamesService
                 .GetAll<GameViewModel>()
                 .Where(g => g.Id == gameId)
                 .FirstOrDefault();
 
-            this.gamesService.FillingThePawns(model);
+            this.gamesService.FillingThePawns(game);
 
-            return this.View("Game", model);
+            await this.allGamesHub.Clients.All.SendAsync("Game", game);
+
+            var newModel = this.gamesService.GetUpdateForGames();
+
+            await this.allGamesHub.Clients.All.SendAsync("AllGames", newModel);
+
+            return this.View("Game", game);
         }
 
         public IActionResult AllGamesAsync()

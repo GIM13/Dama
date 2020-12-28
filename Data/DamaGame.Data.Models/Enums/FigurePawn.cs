@@ -3,9 +3,12 @@
     public enum FigurePawn
     {
         None = 0,
-        FigureCircle = 1,
-        FigureSquare = 2,
-        FigureStar = 3,
-        FigureTriangle = 4,
+        Horse = 1,
+        Dragon = 2,
+        Spider = 3,
+        Dog = 4,
+        Cat = 5,
+        Crow = 6,
+        Hippo = 7,
     }
 }
