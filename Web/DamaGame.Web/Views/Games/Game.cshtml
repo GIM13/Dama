@@ -7,7 +7,7 @@
 }
 
 <h1 class="card-title text-center text-primary">@this.ViewData["Title"]   triabva da se pravi</h1>
-<div id="game">
+<div class="game">
     <h1 class="card-title text-center text-primary"> @this.Model.LeftPlayer.Name    &    @this.Model.RightPlayer.Name</h1>
 
     <img src="~/img/board.png" class="img-fluid" alt="Responsive image">
@@ -27,64 +27,60 @@
               |              |              |
               H1-------------H5-------------H8
         __________________________________________*@
-    @if (true)
-    {
-        var positions = this.Model.Playground.Positions.ToList();
 
-        <div class="row-cols-1">
-            <a id="A1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+    <div class="row-cols-1">
+        <a id="A1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="A4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="A4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="A8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
-        </div>
-        <div class="row-cols-1">
-            <a id="B2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="A8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+    </div>
+    <div class="row-cols-1">
+        <a id="B2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="B4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="B4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="B7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
-        </div>
-        <div class="row-cols-1">
-            <a id="C3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="B7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+    </div>
+    <div class="row-cols-1">
+        <a id="C3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="C4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="C4" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="C6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
-        </div>
-        <div class="row-cols-1">
-            <a id="D1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="C6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+    </div>
+    <div class="row-cols-1">
+        <a id="D1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="D2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="D2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="D3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
-            <a id="E6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="D3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="E6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="E7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="E7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="E8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
-        </div>
-        <div class="row-cols-1">
-            <a id="F3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="E8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+    </div>
+    <div class="row-cols-1">
+        <a id="F3" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="F5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="F5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="F6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
-        </div>
-        <div class="row-cols-1">
-            <a id="G2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="F6" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+    </div>
+    <div class="row-cols-1">
+        <a id="G2" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="G5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="G5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="G7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
-        </div>
-        <div class="row-cols-1">
-            <a id="H1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="G7" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+    </div>
+    <div class="row-cols-1">
+        <a id="H1" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="H5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+        <a id="H5" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
 
-            <a id="H8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
-        </div>
-    }
+        <a id="H8" class="btn btn-primary" asp-controller="Players" asp-action="AddPlayer"><i class="far fa-circle" style="font-size:20px;color:hotpink"></i></a>
+    </div>
     <script type="module" src="~/js/board.js"></script>
 </div>

@@ -19,7 +19,7 @@
         [StringLength(2, MinimumLength = 2)]
         public string Name { get; set; }
 
-        public Color Color { get; set; } = Color.Sans;
+        public Color Color { get; set; } = Color.White;
 
         public FigurePosition Figure { get; set; } = FigurePosition.FigureFreePosition;
 
